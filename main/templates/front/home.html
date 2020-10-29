@@ -1,0 +1,511 @@
+<!-- extending base html -->
+{% extends 'base.html' %}
+<!-- loading static files -->
+{%load static%}
+<!-- static file loaded -->
+<!-- main block starts -->
+{%block main_content%}
+<!-- starting inner of main content -->
+<style>
+    .entry-header {
+        font-family: 'Red Hat Display', cursive;
+        font-weight: 300;
+    }
+    
+    .entry-content p {
+        color: black;
+    }
+</style>
+<section class="carrowsel-slider">
+    <div class="swiper-container hero-slider">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide hero-content-wrap" style="background-image: url('static/front/images/hero.jpg')">
+                <div class="hero-content-overlay position-absolute w-100 h-100">
+                    <div class="container h-100">
+                        <div class="row h-100">
+                            <div class="col-12 col-lg-6 d-flex flex-column justify-content-center align-items-start">
+                                <header class="entry-header">
+                                    <h1>The Best <br>Medical Services</h1>
+                                </header>
+                                <!-- .entry-header -->
+
+                                <div class="entry-content mt-4">
+                                    <p>We Provide the best service when it needs. Our medical team is one of the best team and we don't compromize any disease untill it's fully cured. So give your best and take as you expected.</p>
+                                </div>
+                                <!-- .entry-content -->
+
+                                <footer class="entry-footer d-flex flex-wrap align-items-center mt-4">
+                                    <a href="#" class="button gradient-bg">Read More</a>
+                                </footer>
+                                <!-- .entry-footer -->
+                            </div>
+                            <!-- .col -->
+                        </div>
+                        <!-- .row -->
+                    </div>
+                    <!-- .container -->
+                </div>
+                <!-- .hero-content-overlay -->
+            </div>
+            <!-- .hero-content-wrap -->
+
+            <div class="swiper-slide hero-content-wrap" style="background-image: url('static/front/images/hero.jpg')">
+                <div class="hero-content-overlay position-absolute w-100 h-100">
+                    <div class="container h-100">
+                        <div class="row h-100">
+                            <div class="col-12 col-lg-6 d-flex flex-column justify-content-center align-items-start">
+                                <header class="entry-header">
+                                    <h1>The Best <br>Medical Services</h1>
+                                </header>
+                                <!-- .entry-header -->
+
+                                <div class="entry-content mt-4">
+                                    <p>We Provide the best service when it needs. Our medical team is one of the best team and we don't compromize any disease untill it's fully cured. So give your best and take as you expected.</p>
+                                </div>
+                                <!-- .entry-content -->
+
+                                <footer class="entry-footer d-flex flex-wrap align-items-center mt-4">
+                                    <a href="#" class="button gradient-bg">Read More</a>
+                                </footer>
+                                <!-- .entry-footer -->
+                            </div>
+                            <!-- .col -->
+                        </div>
+                        <!-- .row -->
+                    </div>
+                    <!-- .container -->
+                </div>
+                <!-- .hero-content-overlay -->
+            </div>
+            <!-- .hero-content-wrap -->
+
+            <div class="swiper-slide hero-content-wrap" style="background-image: url('static/front/images/hero.jpg')">
+                <div class="hero-content-overlay position-absolute w-100 h-100">
+                    <div class="container h-100">
+                        <div class="row h-100">
+                            <div class="col-12 col-lg-6 d-flex flex-column justify-content-center align-items-start">
+                                <header class="entry-header">
+                                    <h1>The Best <br>Medical Services</h1>
+                                </header>
+                                <!-- .entry-header -->
+
+                                <div class="entry-content mt-4">
+                                    <p>We Provide the best service when it needs. Our medical team is one of the best team and we don't compromize any disease untill it's fully cured. So give your best and take as you expected.</p>
+                                </div>
+                                <!-- .entry-content -->
+
+                                <footer class="entry-footer d-flex flex-wrap align-items-center mt-4">
+                                    <a href="#" class="button gradient-bg">Read More</a>
+                                </footer>
+                                <!-- .entry-footer -->
+                            </div>
+                            <!-- .col -->
+                        </div>
+                        <!-- .row -->
+                    </div>
+                    <!-- .container -->
+                </div>
+                <!-- .hero-content-overlay -->
+            </div>
+            <!-- .hero-content-wrap -->
+        </div>
+        <!-- .swiper-wrapper -->
+
+        <div class="pagination-wrap position-absolute w-100">
+            <div class="swiper-pagination d-flex flex-row flex-md-column"></div>
+        </div>
+        <!-- .pagination-wrap -->
+    </div>
+    <!-- .hero-slider -->
+</section>
+<section class="appointment">
+    <div class="homepage-boxes">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="opening-hours">
+                        <h2 class="d-flex align-items-center">Opening Hours</h2>
+
+                        <ul class="p-0 m-0">
+                            <li>Monday - Thursday <span>8.00 - 19.00</span></li>
+                            <li>Friday <span>8.00 - 18.30</span></li>
+                            <li>Saturday <span>9.30 - 17.00</span></li>
+                            <li>Sunday <span>9.30 - 15.00</span></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-3 mt-5 mt-md-0">
+                    <div class="emergency-box">
+                        <h2 class="d-flex align-items-center">Emergency</h2>
+
+                        <div class="call-btn button gradient-bg">
+                            <a class="d-flex justify-content-center align-items-center" href="#"><img src="{%static 'front/images/emergency-call.png'%}"> +8801762178238</a>
+                        </div>
+
+                        <p>Lorem ipsum dolor sit amet, cons ectetur adipiscing elit. Donec males uada lorem maximus mauris sceler isque, at rutrum nulla.</p>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-5 mt-5 mt-lg-0">
+                    <div class="appointment-box">
+                        <h2 class="d-flex align-items-center">Make an Appointment</h2>
+
+                        <form class="d-flex flex-wrap justify-content-between">
+                            <select class="select-department">
+                                    <option value="value1">Select Department</option>
+                                    <option value="value2">Select Department 1</option>
+                                    <option value="value3">Select Department 2</option>
+                                </select>
+
+                            <select class="select-doctor">
+                                    <option>Select Doctor</option>
+                                    <option>Select Doctor 1</option>
+                                    <option>Select Doctor 2</option>
+                                </select>
+
+                            <input type="text" placeholder="Name">
+
+                            <input type="number" placeholder="Phone No">
+
+                            <input class="button gradient-bg" type="submit" value="Boom Appoitnment">
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="departments">
+    <div class="our-departments">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="our-departments-wrap">
+                        <h2>Our Departments</h2>
+
+                        <div class="row">
+                            <div class="col-12 col-md-6 col-lg-4">
+                                <div class="our-departments-cont">
+                                    <header class="entry-header d-flex flex-wrap align-items-center">
+                                        <img src="{%static 'front/images/cardiogram.png'%}" alt="">
+
+                                        <h3>Cardioology</h3>
+                                    </header>
+
+                                    <div class="entry-content">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris.</p>
+                                    </div>
+
+                                    <footer class="entry-footer">
+                                        <a href="#">read more</a>
+                                    </footer>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6 col-lg-4">
+                                <div class="our-departments-cont">
+                                    <header class="entry-header d-flex flex-wrap align-items-center">
+                                        <img src="{%static 'front/'%}images/stomach-2.png" alt="">
+
+                                        <h3>Gastroenterology</h3>
+                                    </header>
+
+                                    <div class="entry-content">
+                                        <p>Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien.</p>
+                                    </div>
+
+                                    <footer class="entry-footer">
+                                        <a href="#">read more</a>
+                                    </footer>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6 col-lg-4">
+                                <div class="our-departments-cont">
+                                    <header class="entry-header d-flex flex-wrap align-items-center">
+                                        <img src="{%static 'front/'%}images/blood-sample-2.png" alt="">
+
+                                        <h3>Medical Lab</h3>
+                                    </header>
+
+                                    <div class="entry-content">
+                                        <p>Lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus.</p>
+                                    </div>
+
+                                    <footer class="entry-footer">
+                                        <a href="#">read more</a>
+                                    </footer>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6 col-lg-4">
+                                <div class="our-departments-cont">
+                                    <header class="entry-header d-flex flex-wrap align-items-center">
+                                        <img src="{%static 'front/'%}images/teeth.png" alt="">
+
+                                        <h3>Dental Care</h3>
+                                    </header>
+
+                                    <div class="entry-content">
+                                        <p>Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien.</p>
+                                    </div>
+
+                                    <footer class="entry-footer">
+                                        <a href="#">read more</a>
+                                    </footer>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6 col-lg-4">
+                                <div class="our-departments-cont">
+                                    <header class="entry-header d-flex flex-wrap align-items-center">
+                                        <img src="{%static 'front/'%}images/stretcher.png" alt="">
+
+                                        <h3>Surgery</h3>
+                                    </header>
+
+                                    <div class="entry-content">
+                                        <p>Lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus.</p>
+                                    </div>
+
+                                    <footer class="entry-footer">
+                                        <a href="#">read more</a>
+                                    </footer>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6 col-lg-4">
+                                <div class="our-departments-cont">
+                                    <header class="entry-header d-flex flex-wrap align-items-center">
+                                        <img src="{%static 'front/'%}images/scanner.png" alt="">
+
+                                        <h3>Neurology</h3>
+                                    </header>
+
+                                    <div class="entry-content">
+                                        <p>Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien.</p>
+                                    </div>
+
+                                    <footer class="entry-footer">
+                                        <a href="#">read more</a>
+                                    </footer>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6 col-lg-4 mb-md-0">
+                                <div class="our-departments-cont">
+                                    <header class="entry-header d-flex flex-wrap align-items-center">
+                                        <img src="{%static 'front/'%}images/bones.png" alt="">
+
+                                        <h3>Orthopaedy</h3>
+                                    </header>
+
+                                    <div class="entry-content">
+                                        <p>Lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus.</p>
+                                    </div>
+
+                                    <footer class="entry-footer">
+                                        <a href="#">read more</a>
+                                    </footer>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6 col-lg-4 mb-lg-0">
+                                <div class="our-departments-cont">
+                                    <header class="entry-header d-flex flex-wrap align-items-center">
+                                        <img src="{%static 'front/'%}images/blood-donation-2.png" alt="">
+
+                                        <h3>Pediatry</h3>
+                                    </header>
+
+                                    <div class="entry-content">
+                                        <p>Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien.</p>
+                                    </div>
+
+                                    <footer class="entry-footer">
+                                        <a href="#">read more</a>
+                                    </footer>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6 col-lg-4 mb-0">
+                                <div class="our-departments-cont">
+                                    <header class="entry-header d-flex flex-wrap align-items-center">
+                                        <img src="{%static 'front/'%}images/glasses.png" alt="">
+
+                                        <h3>Ophthalmology</h3>
+                                    </header>
+
+                                    <div class="entry-content">
+                                        <p>Lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus.</p>
+                                    </div>
+
+                                    <footer class="entry-footer">
+                                        <a href="#">read more</a>
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="team">
+    <div class="medical-team">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 align-items-center">
+                    <h2>Developer's Team</h2>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="medical-team-wrap">
+                        <img src="{%static 'front/images/team/shahed.jpg'%}" alt="">
+
+                        <h4>Shahed Talukder</h4>
+                        <h5>Full-Stack Developer</h5>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-3 mt-5 mt-md-0">
+                    <div class="medical-team-wrap">
+                        <img src="{%static 'front/images/team/jony.jpg'%}" alt="">
+
+                        <h4>Md Jony Mia</h4>
+                        <h5>Front-end Developer(JavaScript)</h5>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-3 mt-5 mt-lg-0">
+                    <div class="medical-team-wrap">
+                        <img src="{%static 'front/images/team/joy.jpg'%}" alt="">
+
+                        <h4>Johirul Islam Joy</h4>
+                        <h5>Front-end Developer</h5>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-3 mt-5 mt-lg-0">
+                    <div class="medical-team-wrap">
+                        <img src="{%static 'front/images/team/surovi.jpg'%}" alt="">
+
+                        <h4>Most. Sultana Akter Surovi</h4>
+                        <h5>Software Tester</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="description">
+    <div class="faq-stuff">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2>Faq & Stuff</h2>
+                </div>
+
+                <div class="col-12 col-lg-6 mb-5 mb-lg-0">
+                    <div class="accordion-wrap type-accordion">
+                        <h3 class="entry-title d-flex justify-content-between align-items-center active">Elit mir congue ligula et efficitur pellentesqu<span class="arrow-r"></span></h3>
+
+                        <div class="entry-content">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris.</p>
+                        </div>
+
+                        <h3 class="entry-title d-flex justify-content-between align-items-center">Pulvinar elit mi. Integer congue ligula et efficitur <span class="arrow-r"></span></h3>
+
+                        <div class="entry-content">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris.</p>
+                        </div>
+
+                        <h3 class="entry-title d-flex justify-content-between align-items-center">Pellentesque pulvinar elit mi. Integer congue<span class="arrow-r"></span></h3>
+
+                        <div class="entry-content">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-6 mt-5 mt-lg-0">
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+                            <div class="professional-box">
+                                <h2 class="d-flex align-items-center">Professional</h2>
+
+                                <img src="images/cardiogram-2.png" alt="">
+
+                                <p>Lorem ipsum dolor sit amet, cons ectetur adipiscing elit. Donec males uada lorem.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <div class="quality-box">
+                                <h2 class="d-flex align-items-center">Quality</h2>
+
+                                <img src="images/hospital.png" alt="">
+
+                                <p>Lorem ipsum dolor sit amet, cons ectetur adipiscing elit. Donec males uada lorem.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="services">
+    <div class="quality-services">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2>Only Top Quality Services</h2>
+
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem ma ximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus. Curabitur ut augue finibus, luctus
+                                tortor at, ornare erat. Nulla facilisi. Sed est risus, laoreet et quam non, malesuada viverra accumsan leo.</p>
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <p>Amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus. Curabitur ut augue finibus, luctus tortor at, ornare erat.
+                                Nulla facilisi. Sed est risus, laoreet et quam non, viverra accumsan leo.</p>
+                        </div>
+                    </div>
+
+                    <div class="w-100 text-center mt-5">
+                        <a class="button gradient-bg" href="#">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="newsletter">
+    <div class="subscribe-banner">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-8 offset-lg-2">
+                    <h2>Subscribe to our newsletter</h2>
+
+                    <form>
+                        <input type="email" placeholder="E-mail address">
+                        <input class="button gradient-bg" type="submit" value="Subscribe">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ending inner of main content -->
+{%endblock main_content%}
+<!-- main block ends -->
+{%block scripts%}
+<!-- scripts starts -->
+<!-- scripts ends -->
+{%endblock scripts%}
