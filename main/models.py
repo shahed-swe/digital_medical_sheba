@@ -126,7 +126,7 @@ class assignAssistant(models.Model):
 
 class assignedDoctor(models.Model):
     patient = models.OneToOneField(Patient, on_delete=models.CASCADE, primary_key=True)
-    doctor = models.ForeignKey(Doctor, on_delete=models.SET_NULL,blank=True, null=True)
+    doctor = models.ForeignKey(Doctor, on_delete=models.SET_NULL,blank=True, null=True, related_name="assign_doctor")
 
     class Meta:
         db_table = "assigned_doctor"
