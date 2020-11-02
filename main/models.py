@@ -123,3 +123,13 @@ class assignAssistant(models.Model):
 
     def __str__(self):
         return self.doctor.full_name + ' | '+self.assistant.user.first_name + ' | '+str(self.id)
+
+class assignedDoctor(models.Model):
+    patient = models.OneToOneField(Patient, on_delete=models.CASCADE, primary_key=True)
+    doctor = models.ForeignKey(Doctor, on_delete=models.SET_NULL,blank=True, null=True)
+
+    class Meta:
+        db_table = "assigned_doctor"
+    
+    def __str__(self):
+        return self.patient.user.first_name + ' | '+self.doctor.user.first_name + ' | '+str(self.id)

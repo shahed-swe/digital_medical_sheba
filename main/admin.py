@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import *
+from django.contrib.auth.models import Group
 # Register your models here.
 @admin.register(User)
 class User(admin.ModelAdmin):
@@ -13,3 +14,4 @@ admin.site.register(Bill)
 admin.site.register(assignNurse)
 admin.site.register(assignMedicine)
 admin.site.register(assignAssistant)
+admin.site.unregister(Group)
