@@ -6,17 +6,17 @@ class patientSerializer(serializers.ModelSerializer):
         model = Patient
         fields = '__all__'
 
-class DoctorSerializer(serializers.ModelSerializer):
+class doctorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Doctor
         fields = '__all__'
 
-class NurseSerializer(serializers.ModelSerializer):
+class nurseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Nurse
         fields = '__all__'
 
-class Assistant(serializers.ModelSerializer):
+class assistantSerializer(serializers.ModelSerializer):
     class Meta:
         model = Assistant
         fields = '__all__'
