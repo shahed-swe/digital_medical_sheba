@@ -16,9 +16,6 @@ Then visit `http://localhost:8000` to view the app. Alternatively you
 can use foreman and gunicorn to run the server locally (after copying
 `dev.env` to `.env`):
 
-```sh
-$ foreman start
-```
 
 ## Deploy to Heroku
 
