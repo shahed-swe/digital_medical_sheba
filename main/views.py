@@ -5,12 +5,12 @@ from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
-from django.contrib.auth.models import User
+from .models import User
 from rest_framework import viewsets,status
 
 class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializers_class = serializers.User
+    queryset = models.Patient.objects.all()
+    serializer_class = serializers.patientSerializer
 
 # Create your views here.
 def home(request):
