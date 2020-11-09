@@ -21,3 +21,20 @@ class assistantSerializer(serializers.ModelSerializer):
         model = Assistant
         fields = '__all__'
 
+
+class assignMedicineSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = assignMedicine
+        fields = '__all__'
+
+class assignAssistantSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = assignAssistant
+        fields = '__all__'
+
+class assignDoctorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = assignedDoctor
+        fields = '__all__'
+
+class 
