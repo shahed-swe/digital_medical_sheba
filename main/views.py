@@ -24,8 +24,9 @@ class NurseViewSet(viewsets.ModelViewSet):
     queryset = models.Nurse.objects.all()
     serializer_class = serializers.nurseSerializer
 
-
-
+class AssistantViewSet(viewsets.ModelViewSet):
+    queryset = models.Assistant.objects.all()
+    serializer_class = serializers.assistantSerializer
 
 
 

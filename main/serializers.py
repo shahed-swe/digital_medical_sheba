@@ -140,10 +140,39 @@ class nurseSerializer(serializers.ModelSerializer):
 
 
 class assistantSerializer(serializers.ModelSerializer):
-    
+    user = UserSerializer(many=False)
     class Meta:
         model = Assistant
-        fields = '__all__'
+        fields = ['user','full_name','address','age','phone_no']
+        extra_kwargs = {
+            'full_name':{
+                'read_only':True
+            }
+        }
+    
+    def create(self, validate_data):
+        new_validate_data = {}
+        d1 = Dictionary()
+        new_validate_data = d1.dictBack(validate_data)
+        user = User(
+            username=new_validate_data.get("username"),
+            first_name=new_validate_data.get("first_name"),
+            last_name=new_validate_data.get("last_name"),
+            is_assistant=True,
+            is_active=True
+        )
+        user.set_password(new_validate_data.get("password"))
+        user.save()
+        assistant = Assistant(
+            user=user,
+            full_name=user.first_name + ' ' + user.last_name,
+            address=validate_data['address'],
+            age=validate_data['age'],
+            phone_no=validate_data['phone_no']
+        )
+        assistant.save()
+        Token.objects.create(user=user)
+        return assistant
 
 
 class assignMedicineSerializer(serializers.ModelSerializer):

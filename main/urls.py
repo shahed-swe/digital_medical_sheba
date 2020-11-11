@@ -6,8 +6,8 @@ router = routers.DefaultRouter()
 router.register(r'patient_user',views.PatientViewSet)
 router.register(r'doctor_user',views.DoctorViewSet)
 router.register(r'nurse_user',views.NurseViewSet)
+router.register(r'assistant_user', views.AssistantViewSet)
 router.register(r'normal_user',views.UserViewSet)
-
 
 
 urlpatterns = [

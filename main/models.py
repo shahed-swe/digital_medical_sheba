@@ -66,7 +66,7 @@ class Assistant(models.Model):
         db_table = "assistant_info"
 
     def __str__(self):
-        return self.user.first_name + ' | '+str(self.id)
+        return self.user.first_name + ' | '+str(self.pk)
 
 class Medicine(models.Model):
     medicine_name = models.CharField(max_length=120,blank=True, null=True)
