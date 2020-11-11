@@ -19,7 +19,16 @@ class PatientViewSet(viewsets.ModelViewSet):
 class DoctorViewSet(viewsets.ModelViewSet):
     queryset = models.Doctor.objects.all()
     serializer_class = serializers.doctorSerializer
-    
+
+class NurseViewSet(viewsets.ModelViewSet):
+    queryset = models.Nurse.objects.all()
+    serializer_class = serializers.nurseSerializer
+
+
+
+
+
+
 # Create your views here.
 def home(request):
     context = {"title":"Home"}

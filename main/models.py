@@ -42,9 +42,10 @@ class Doctor(models.Model):
         return self.user.first_name + ' | '+str(self.pk)
 
 class Nurse(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE,primary_key=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE,primary_key=True,related_name="nurseuser")
     full_name = models.CharField(max_length=120,blank=True,null=True)
     degree = models.CharField(max_length=120,blank=True,null=True)
+    age = models.CharField(max_length=50, blank=True, null=True)
     address = models.CharField(max_length=120,blank=True,null=True)
     phone_no = models.CharField(max_length=50,blank=True,null=True)
 
@@ -52,12 +53,13 @@ class Nurse(models.Model):
         db_table = "nurse_info"
 
     def __str__(self):
-        return self.user.first_name + ' | '+str(self.id)
+        return self.user.first_name + ' | '+str(self.pk)
 
 class Assistant(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True,related_name="assistantuser")
     full_name = models.CharField(max_length=120, blank=True,null=True)
     address = models.CharField(max_length=500,blank=True,null=True)
+    age = models.CharField(max_length=50, blank=True, null=True)
     phone_no = models.CharField(max_length=50,blank=True,null=True)
 
     class Meta:
