@@ -4,6 +4,7 @@ from rest_framework import routers
 from django.conf.urls import include
 router = routers.DefaultRouter()
 router.register(r'patient_user',views.PatientViewSet)
+router.register(r'doctor_user',views.DoctorViewSet)
 router.register(r'normal_user',views.UserViewSet)
 
 

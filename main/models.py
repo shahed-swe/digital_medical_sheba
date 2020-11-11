@@ -10,6 +10,9 @@ class User(AbstractUser):
     is_admin = models.BooleanField(default=False)
     is_registered = models.BooleanField(default=False)
 
+    def __str__(self):
+        return self.first_name+ ' | '+str(self.pk)
+
 class Patient(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True,related_name='user')
     full_name = models.CharField(max_length=50, blank=True, null=True)
@@ -21,12 +24,14 @@ class Patient(models.Model):
         db_table = "patient_info"
     
     def __str__(self):
-        return self.user.first_name + ' | ' + str(self.user.last_login)
+        return self.user.first_name + ' | ' + str(self.user.last_name)
 
 class Doctor(models.Model):
-    user = models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True)
+    user = models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True,related_name='doctoruser')
     user_name = models.CharField(max_length=50, blank=True, null=True)
     full_name = models.CharField(max_length=50, blank=True, null=True)
+    address = models.CharField(max_length=500, blank=True, null=True)
+    age = models.CharField(max_length=50, blank=True, null=True)
     degree = models.CharField(max_length=120,blank=True,null=True)
     phone_no = models.CharField(max_length=50, blank=True,null=True)
 
@@ -34,7 +39,7 @@ class Doctor(models.Model):
         db_table = "doctor_info"
     
     def __str__(self):
-        return self.user.first_name + ' | '+str(self.id)
+        return self.user.first_name + ' | '+str(self.pk)
 
 class Nurse(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE,primary_key=True)
