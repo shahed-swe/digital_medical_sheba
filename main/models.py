@@ -21,7 +21,7 @@ class Patient(models.Model):
         db_table = "patient_info"
     
     def __str__(self):
-        return self.user.first_name + ' | ' + str(self.id)
+        return self.user.first_name + ' | ' + str(self.user.last_login)
 
 class Doctor(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True)

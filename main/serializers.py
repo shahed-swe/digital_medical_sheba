@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import *
 from rest_framework.authtoken.models import Token
-
+from collections import OrderedDict
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -12,19 +12,19 @@ class UserSerializer(serializers.ModelSerializer):
                 'required':True
             },
             'is_patient':{
-                'write_only':True,
+                'read_only':True,
             },
             'is_doctor':{
-                'write_only':True,
+                'read_only':True,
             },
             'is_nurse':{
-                'write_only':True,
+                'read_only':True,
             },
             'is_assistant':{
-                'write_only':True,
+                'read_only':True,
             },
             'is_admin':{
-                'write_only':True,
+                'read_only':True,
             }
         }
     def create(self, validate_data):
@@ -43,18 +43,28 @@ class patientSerializer(serializers.ModelSerializer):
             }
         }
     def create(self, validate_data):
-        serializer_data = UserSerializer(
-            validate_data.user
-        ).data
+        new_validate_data = {}
+        d1 = Dictionary()
+        new_validate_data = d1.dictBack(validate_data)
+        user = User(
+            username = new_validate_data.get("username"),
+            first_name = new_validate_data.get("first_name"),
+            last_name = new_validate_data.get("last_name"),
+            is_patient = True,
+            is_active=True
+        )
+        user.set_password(new_validate_data.get("password"))
+        user.save()
         patient = Patient(
-            full_name = user.first_name + ' ' + user.last_name,
-            address = validate_data['address'],
-            age = validate_data['age'],
-            phone_no = validate_data['phone_no']
+            user = user,
+            full_name=user.first_name + ' ' + user.last_name,
+            address=validate_data['address'],
+            age=validate_data['age'],
+            phone_no=validate_data['phone_no'],
         )
         patient.save()
         Token.objects.create(user=user)
-        return user
+        return patient
 
 class doctorSerializer(serializers.ModelSerializer):
     class Meta:
@@ -86,3 +96,11 @@ class assignDoctorSerializer(serializers.ModelSerializer):
     class Meta:
         model = assignedDoctor
         fields = '__all__'
+
+class Dictionary:
+    def dictBack(self, data):
+        for x, y in data.items():
+            if type(y) == OrderedDict:
+                return dict(y)
+            else:
+                pass
