@@ -9,6 +9,10 @@ from .models import User
 from rest_framework import viewsets,status
 
 class UserViewSet(viewsets.ModelViewSet):
+    queryset = models.User.objects.all()
+    serializer_class = serializers.UserSerializer
+
+class PatientViewSet(viewsets.ModelViewSet):
     queryset = models.Patient.objects.all()
     serializer_class = serializers.patientSerializer
 

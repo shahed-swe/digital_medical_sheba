@@ -2,20 +2,57 @@ from rest_framework import serializers
 from .models import *
 from rest_framework.authtoken.models import Token
 
-
-class patientSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Patient
-        fields = '__all__'
-        extra_kwargs = {
-            'password':{
+        model = User
+        fields = ['username','first_name','last_name','password','is_patient','is_doctor','is_nurse','is_assistant','is_admin']
+        extra_kwargs ={
+            'password' : {
                 'write_only':True,
                 'required':True
+            },
+            'is_patient':{
+                'write_only':True,
+            },
+            'is_doctor':{
+                'write_only':True,
+            },
+            'is_nurse':{
+                'write_only':True,
+            },
+            'is_assistant':{
+                'write_only':True,
+            },
+            'is_admin':{
+                'write_only':True,
             }
         }
-    
     def create(self, validate_data):
-        user = User.objects.create_user(**validate_data)
+        user = User.objects.create(**validate_data)
+        Token.objects.create(user=user)
+        return user
+
+class patientSerializer(serializers.ModelSerializer):
+    user = UserSerializer(many=False)
+    class Meta:
+        model = Patient
+        fields = ['user','full_name','address','age','phone_no']
+        extra_kwargs = {
+            'full_name':{
+                'read_only':True,
+            }
+        }
+    def create(self, validate_data):
+        serializer_data = UserSerializer(
+            validate_data.user
+        ).data
+        patient = Patient(
+            full_name = user.first_name + ' ' + user.last_name,
+            address = validate_data['address'],
+            age = validate_data['age'],
+            phone_no = validate_data['phone_no']
+        )
+        patient.save()
         Token.objects.create(user=user)
         return user
 
