@@ -176,6 +176,7 @@ class assistantSerializer(serializers.ModelSerializer):
 
 
 class assignMedicineSerializer(serializers.ModelSerializer):
+    
     class Meta:
         model = assignMedicine
         fields = '__all__'

@@ -29,6 +29,10 @@ class AssistantViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.assistantSerializer
 
 
+class AssignMedicineViewSet(viewsets.ModelViewSet):
+    queryset = models.assignMedicine.objects.all()
+    serializer_class = serializers.assignMedicineSerializer
+    
 
 # Create your views here.
 def home(request):

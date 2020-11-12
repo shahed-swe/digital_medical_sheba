@@ -68,9 +68,18 @@ class Assistant(models.Model):
     def __str__(self):
         return self.user.first_name + ' | '+str(self.pk)
 
+class MedicineCompany(models.Model):
+    company_name = models.CharField(max_length=120,blank=True,null=True)
+
+    class Meta:
+        db_table = "medicine_company"
+
+    def __str__(self):
+        return self.company_name + " | "+str(self.pk)
+
 class Medicine(models.Model):
     medicine_name = models.CharField(max_length=120,blank=True, null=True)
-    company_name = models.CharField(max_length=120,blank=True,null=True)
+    company_name = models.ManyToManyField(MedicineCompany, related_name="company")
 
     class Meta:
         db_table = "medicine_info"
@@ -107,7 +116,7 @@ class assignNurse(models.Model):
 
 class assignMedicine(models.Model):
     patient = models.OneToOneField(Patient, on_delete=models.CASCADE, primary_key=True)
-    medicine = models.ForeignKey(Medicine, on_delete=models.SET_NULL, blank=True, null=True, related_name="assign_medicine")
+    medicine = models.ForeignKey(Medicine, on_delete=models.CASCADE, blank=True, null=True, related_name="assign_medicine")
 
     class Meta:
         db_table = "assigned_medicine"
