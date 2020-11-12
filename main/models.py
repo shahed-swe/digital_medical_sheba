@@ -106,7 +106,7 @@ class Bill(models.Model):
 
 class assignNurse(models.Model):
     patient = models.OneToOneField(Patient, on_delete=models.CASCADE, primary_key=True)
-    nurse = models.ForeignKey(Nurse, on_delete=models.SET_NULL,blank=True,null=True,related_name='assign_nurse')
+    nurse = models.ManyToManyField(Nurse, related_name='assign_nurse')
 
     class Meta:
         db_table = "assigned_nurse"
@@ -136,7 +136,7 @@ class assignAssistant(models.Model):
 
 class assignedDoctor(models.Model):
     patient = models.OneToOneField(Patient, on_delete=models.CASCADE, primary_key=True)
-    doctor = models.ForeignKey(Doctor, on_delete=models.SET_NULL,blank=True, null=True, related_name="assign_doctor")
+    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE,blank=True, null=True, related_name="assign_doctor")
 
     class Meta:
         db_table = "assigned_doctor"
