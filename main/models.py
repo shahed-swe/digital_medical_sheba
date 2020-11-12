@@ -115,14 +115,14 @@ class assignNurse(models.Model):
         return self.patient.user.first_name + ' | '+ self.nurse.user.first_name + ' | '+ str(self.id)
 
 class assignMedicine(models.Model):
-    patient = models.OneToOneField(Patient, on_delete=models.CASCADE, primary_key=True)
-    medicine = models.ForeignKey(Medicine, on_delete=models.CASCADE, blank=True, null=True, related_name="assign_medicine")
+    patient = models.OneToOneField(Patient, on_delete=models.CASCADE, primary_key=True,related_name="patient_medicine")
+    medicine = models.ManyToManyField(Medicine, related_name="assign_medicine")
 
     class Meta:
         db_table = "assigned_medicine"
     
     def __str__(self):
-        return self.patient.user.first_name + ' | '+ self.medicine.medicine_name + ' | '+ str(self.id)
+        return "Medicine Assigned For "+self.patient.user.first_name +" "+self.patient.user.last_name+" | "+str(self.pk)
 
 class assignAssistant(models.Model):
     doctor = models.OneToOneField(Doctor, on_delete=models.CASCADE, primary_key=True)

@@ -28,6 +28,9 @@ class AssistantViewSet(viewsets.ModelViewSet):
     queryset = models.Assistant.objects.all()
     serializer_class = serializers.assistantSerializer
 
+class medicineViewSet(viewsets.ModelViewSet):
+    queryset = models.Medicine.objects.all()
+    serializer_class = serializers.medicineSerializer
 
 class AssignMedicineViewSet(viewsets.ModelViewSet):
     queryset = models.assignMedicine.objects.all()
