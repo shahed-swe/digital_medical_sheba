@@ -203,12 +203,14 @@ class assignNurseSerializer(serializers.ModelSerializer):
 
 class assignAssistantSerializer(serializers.ModelSerializer):
     doctor = doctorSerializer(many=False)
-    # assistant = assistantSerializer(many=False)
+    assistant = assistantSerializer(many=False)
     class Meta:
         model = assignAssistant
         fields = '__all__'
 
 class assignDoctorSerializer(serializers.ModelSerializer):
+    patient = patientSerializer(many=False)
+    doctor = doctorSerializer(many=False)
     class Meta:
         model = assignedDoctor
         fields = '__all__'

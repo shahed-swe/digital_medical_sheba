@@ -52,6 +52,11 @@ class AssignAssistantViewSet(viewsets.ModelViewSet):
     authentication_class = (TokenAuthentication,)
     permission_class = (IsAuthenticated,)
 
+class AssignDoctorViewSet(viewsets.ModelViewSet):
+    queryset = models.assignedDoctor.objects.all()
+    serializer_class = serializers.assignDoctorSerializer
+    authentication_class = (TokenAuthentication,)
+    permission_class = (IsAuthenticated,)
 
 # Create your views here.
 def home(request):
