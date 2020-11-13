@@ -8,9 +8,10 @@ router.register(r'doctor_user',views.DoctorViewSet)
 router.register(r'nurse_user',views.NurseViewSet)
 router.register(r'assistant_user', views.AssistantViewSet)
 router.register(r'normal_user',views.UserViewSet)
-
+router.register(r'assign_medicine', views.AssignMedicineViewSet)
+router.register(r'medicine',views.medicineViewSet)
 
 urlpatterns = [
     path('',views.home, name="home"),
-    path('user/',include(router.urls)),
+    path('api/',include(router.urls)),
 ]
