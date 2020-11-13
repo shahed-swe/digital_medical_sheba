@@ -202,6 +202,8 @@ class assignNurseSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class assignAssistantSerializer(serializers.ModelSerializer):
+    doctor = doctorSerializer(many=False)
+    # assistant = assistantSerializer(many=False)
     class Meta:
         model = assignAssistant
         fields = '__all__'
