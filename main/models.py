@@ -88,6 +88,7 @@ class Medicine(models.Model):
         return self.medicine_name + ' | '+ str(self.id)
 
 class Feedback(models.Model):
+    user = models.CharField(max_length=120, blank=True, null=True, default="_")
     feedback = models.CharField(max_length=120, blank=True, null=True)
 
     class Meta:
@@ -112,7 +113,7 @@ class assignNurse(models.Model):
         db_table = "assigned_nurse"
     
     def __str__(self):
-        return self.patient.user.first_name + ' | '+ self.nurse.user.first_name + ' | '+ str(self.id)
+        return "Nurse Assigned For "+self.patient.full_name+" | "+str(self.pk)
 
 class assignMedicine(models.Model):
     patient = models.OneToOneField(Patient, on_delete=models.CASCADE, primary_key=True,related_name="patient_medicine")
@@ -132,7 +133,7 @@ class assignAssistant(models.Model):
         db_table = "assigned_assistant"
 
     def __str__(self):
-        return self.doctor.full_name + ' | '+self.assistant.user.first_name + ' | '+str(self.id)
+        return self.doctor.full_name + ' | '+self.assistant.user.first_name + ' | '+str(self.pk)
 
 class assignedDoctor(models.Model):
     patient = models.OneToOneField(Patient, on_delete=models.CASCADE, primary_key=True)
@@ -142,4 +143,4 @@ class assignedDoctor(models.Model):
         db_table = "assigned_doctor"
     
     def __str__(self):
-        return self.patient.user.first_name + ' | '+self.doctor.user.first_name + ' | '+str(self.id)
+        return self.patient.user.first_name + ' | '+self.doctor.user.first_name + ' | '+str(self.pk)
