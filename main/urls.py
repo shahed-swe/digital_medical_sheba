@@ -15,6 +15,5 @@ router.register(r'assign_doctor', views.AssignDoctorViewSet)
 router.register(r'medicine',views.medicineViewSet)
 
 urlpatterns = [
-    path('',views.home, name="home"),
     path('api/',include(router.urls)),
 ]
