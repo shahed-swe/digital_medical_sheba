@@ -57,12 +57,3 @@ class AssignDoctorViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.assignDoctorSerializer
     authentication_class = (TokenAuthentication,)
     permission_class = (IsAuthenticated,)
-
-# Create your views here.
-def home(request):
-    context = {"title":"Home"}
-    return render(request,'front/home.html',context)
-
-def about(request):
-    context = {"title":"About"}
-    return render(request,'front/about.html',context)
