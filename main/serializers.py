@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import *
 from rest_framework.authtoken.models import Token
 from collections import OrderedDict
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
