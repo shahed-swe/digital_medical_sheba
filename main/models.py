@@ -68,9 +68,18 @@ class Assistant(models.Model):
     def __str__(self):
         return self.user.first_name + ' | '+str(self.pk)
 
+class MedicineCompany(models.Model):
+    company_name = models.CharField(max_length=120,blank=True,null=True)
+
+    class Meta:
+        db_table = "medicine_company"
+
+    def __str__(self):
+        return self.company_name + " | "+str(self.pk)
+
 class Medicine(models.Model):
     medicine_name = models.CharField(max_length=120,blank=True, null=True)
-    company_name = models.CharField(max_length=120,blank=True,null=True)
+    company_name = models.ManyToManyField(MedicineCompany, related_name="company")
 
     class Meta:
         db_table = "medicine_info"
@@ -79,6 +88,7 @@ class Medicine(models.Model):
         return self.medicine_name + ' | '+ str(self.id)
 
 class Feedback(models.Model):
+    user = models.CharField(max_length=120, blank=True, null=True, default="_")
     feedback = models.CharField(max_length=120, blank=True, null=True)
 
     class Meta:
@@ -97,23 +107,23 @@ class Bill(models.Model):
 
 class assignNurse(models.Model):
     patient = models.OneToOneField(Patient, on_delete=models.CASCADE, primary_key=True)
-    nurse = models.ForeignKey(Nurse, on_delete=models.SET_NULL,blank=True,null=True,related_name='assign_nurse')
+    nurse = models.ManyToManyField(Nurse, related_name='assign_nurse')
 
     class Meta:
         db_table = "assigned_nurse"
     
     def __str__(self):
-        return self.patient.user.first_name + ' | '+ self.nurse.user.first_name + ' | '+ str(self.id)
+        return "Nurse Assigned For "+self.patient.full_name+" | "+str(self.pk)
 
 class assignMedicine(models.Model):
-    patient = models.OneToOneField(Patient, on_delete=models.CASCADE, primary_key=True)
-    medicine = models.ForeignKey(Medicine, on_delete=models.SET_NULL, blank=True, null=True, related_name="assign_medicine")
+    patient = models.OneToOneField(Patient, on_delete=models.CASCADE, primary_key=True,related_name="patient_medicine")
+    medicine = models.ManyToManyField(Medicine, related_name="assign_medicine")
 
     class Meta:
         db_table = "assigned_medicine"
     
     def __str__(self):
-        return self.patient.user.first_name + ' | '+ self.medicine.medicine_name + ' | '+ str(self.id)
+        return "Medicine Assigned For "+self.patient.user.first_name +" "+self.patient.user.last_name+" | "+str(self.pk)
 
 class assignAssistant(models.Model):
     doctor = models.OneToOneField(Doctor, on_delete=models.CASCADE, primary_key=True)
@@ -123,14 +133,14 @@ class assignAssistant(models.Model):
         db_table = "assigned_assistant"
 
     def __str__(self):
-        return self.doctor.full_name + ' | '+self.assistant.user.first_name + ' | '+str(self.id)
+        return self.doctor.full_name + ' | '+self.assistant.user.first_name + ' | '+str(self.pk)
 
 class assignedDoctor(models.Model):
     patient = models.OneToOneField(Patient, on_delete=models.CASCADE, primary_key=True)
-    doctor = models.ForeignKey(Doctor, on_delete=models.SET_NULL,blank=True, null=True, related_name="assign_doctor")
+    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE,blank=True, null=True, related_name="assign_doctor")
 
     class Meta:
         db_table = "assigned_doctor"
     
     def __str__(self):
-        return self.patient.user.first_name + ' | '+self.doctor.user.first_name + ' | '+str(self.id)
+        return self.patient.user.first_name + ' | '+self.doctor.user.first_name + ' | '+str(self.pk)

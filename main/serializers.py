@@ -175,17 +175,42 @@ class assistantSerializer(serializers.ModelSerializer):
         return assistant
 
 
+class medicineCompanySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MedicineCompany
+        fields = '__all__'
+
+class medicineSerializer(serializers.ModelSerializer):
+    company_name = medicineCompanySerializer(many=True, read_only=True)
+    class Meta:
+        model = Medicine
+        fields = '__all__'
+
 class assignMedicineSerializer(serializers.ModelSerializer):
+    patient = patientSerializer(many=False, read_only=True)
+    medicine = medicineSerializer(many=True)
     class Meta:
         model = assignMedicine
         fields = '__all__'
 
+class assignNurseSerializer(serializers.ModelSerializer):
+    patient = patientSerializer(many=False, read_only=True)
+    nurse = nurseSerializer(many=True)
+
+    class Meta:
+        model = assignNurse
+        fields = '__all__'
+
 class assignAssistantSerializer(serializers.ModelSerializer):
+    doctor = doctorSerializer(many=False)
+    assistant = assistantSerializer(many=False)
     class Meta:
         model = assignAssistant
         fields = '__all__'
 
 class assignDoctorSerializer(serializers.ModelSerializer):
+    patient = patientSerializer(many=False)
+    doctor = doctorSerializer(many=False)
     class Meta:
         model = assignedDoctor
         fields = '__all__'

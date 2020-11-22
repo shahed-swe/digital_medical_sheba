@@ -28,13 +28,32 @@ class AssistantViewSet(viewsets.ModelViewSet):
     queryset = models.Assistant.objects.all()
     serializer_class = serializers.assistantSerializer
 
+class medicineViewSet(viewsets.ModelViewSet):
+    queryset = models.Medicine.objects.all()
+    serializer_class = serializers.medicineSerializer
+    authentication_class = (TokenAuthentication,)
+    permission_class = (IsAuthenticated,)
 
+class AssignMedicineViewSet(viewsets.ModelViewSet):
+    queryset = models.assignMedicine.objects.all()
+    serializer_class = serializers.assignMedicineSerializer
+    authentication_class = (TokenAuthentication,)
+    permission_class = (IsAuthenticated,)
+    
+class AssignNurseViewSet(viewsets.ModelViewSet):
+    queryset = models.assignNurse.objects.all()
+    serializer_class = serializers.assignNurseSerializer
+    authentication_class = (TokenAuthentication,)
+    permission_class = (IsAuthenticated,)
+    
+class AssignAssistantViewSet(viewsets.ModelViewSet):
+    queryset = models.assignAssistant.objects.all()
+    serializer_class = serializers.assignAssistantSerializer
+    authentication_class = (TokenAuthentication,)
+    permission_class = (IsAuthenticated,)
 
-# Create your views here.
-def home(request):
-    context = {"title":"Home"}
-    return render(request,'front/home.html',context)
-
-def about(request):
-    context = {"title":"About"}
-    return render(request,'front/about.html',context)
+class AssignDoctorViewSet(viewsets.ModelViewSet):
+    queryset = models.assignedDoctor.objects.all()
+    serializer_class = serializers.assignDoctorSerializer
+    authentication_class = (TokenAuthentication,)
+    permission_class = (IsAuthenticated,)
