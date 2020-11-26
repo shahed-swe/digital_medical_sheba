@@ -182,20 +182,20 @@ class medicineCompanySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class medicineSerializer(serializers.ModelSerializer):
-    company_name = medicineCompanySerializer(many=True, read_only=True)
+    company_name = medicineCompanySerializer(many=True)
     class Meta:
         model = Medicine
         fields = '__all__'
 
 class assignMedicineSerializer(serializers.ModelSerializer):
-    patient = patientSerializer(many=False, read_only=True)
+    patient = patientSerializer(many=False)
     medicine = medicineSerializer(many=True)
     class Meta:
         model = assignMedicine
         fields = '__all__'
 
 class assignNurseSerializer(serializers.ModelSerializer):
-    patient = patientSerializer(many=False, read_only=True)
+    patient = patientSerializer(many=False)
     nurse = nurseSerializer(many=True)
 
     class Meta:
@@ -215,6 +215,25 @@ class assignDoctorSerializer(serializers.ModelSerializer):
     class Meta:
         model = assignedDoctor
         fields = '__all__'
+
+class FeedBackSerializer(serializers.ModelSerializer):
+    patient = patientSerializer(many=False)
+    class Meta:
+        model = Feedback
+        fields = '__all__'
+
+class BillSerializer(serializers.ModelSerializer):
+    patient = patientSerializer(many=False)
+    class Meta:
+        model = Bill
+        fields = '__all__'
+
+class ReportSerializer(serializers.ModelSerializer):
+    patient = patientSerializer(many=False)
+    class Meta:
+        model = ReportProblem
+        fields = '__all__'
+
 
 class Dictionary:
     def dictBack(self, data):

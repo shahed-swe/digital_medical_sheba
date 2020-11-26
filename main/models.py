@@ -85,17 +85,18 @@ class Medicine(models.Model):
         db_table = "medicine_info"
 
     def __str__(self):
-        return self.medicine_name + ' | '+ str(self.id)
+        return self.medicine_name + ' | '+ str(self.pk)
 
 class Feedback(models.Model):
-    user = models.CharField(max_length=120, blank=True, null=True, default="_")
+    patient = models.OneToOneField(Patient, on_delete=models.CASCADE, primary_key=True)
     feedback = models.CharField(max_length=120, blank=True, null=True)
 
     class Meta:
         db_table = "feedback_section"
     
     def __str__(self):
-        return self.feedback + ' | '+ str(self.id)
+        return self.feedback + ' | '+ str(self.user.full_name)
+
 
 class Bill(models.Model):
     patient = models.OneToOneField(Patient, on_delete=models.CASCADE, primary_key=True)
@@ -104,6 +105,19 @@ class Bill(models.Model):
     class Meta:
         db_table = "billing_information"
     
+    def __str__(self):
+        return self.patient.full_name+ ' | '+str(self.pk)
+
+class ReportProblem(models.Model):
+    patient = models.OneToOneField(Patient, on_delete=models.CASCADE, primary_key=True)
+    problem = models.CharField(max_length=300, blank=True, null=True)
+
+    class Meta:
+        db_table = "problem_reports"
+    
+    def __str__(self):
+        return self.patient.full_name + ' | '+str(self.pk)
+        
 
 class assignNurse(models.Model):
     patient = models.OneToOneField(Patient, on_delete=models.CASCADE, primary_key=True)

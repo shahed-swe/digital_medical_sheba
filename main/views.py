@@ -63,3 +63,24 @@ class AssignDoctorViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.assignDoctorSerializer
     authentication_class = (TokenAuthentication,)
     permission_class = (IsAuthenticated,)
+
+class FeedbackViewSet(viewsets.ModelViewSet):
+    queryset = models.Feedback.objects.all()
+    serializer_class = serializers.FeedBackSerializer
+    authentication_class = (TokenAuthentication,)
+    permission_class = (IsAuthenticated,)
+
+
+class BillViewSet(viewsets.ModelViewSet):
+    queryset = models.Bill.objects.all()
+    serializer_class = serializers.BillSerializer
+    authentication_class = (TokenAuthentication,)
+    permission_class = (IsAuthenticated,)
+
+class ReportViewSet(viewsets.ModelViewSet):
+    queryset =  models.ReportProblem.objects.all()
+    serializer_class = serializers.ReportSerializer
+    authentication_class = (TokenAuthentication,)
+    permission_class = (IsAuthenticated,)
+
+
