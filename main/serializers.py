@@ -6,7 +6,7 @@ from collections import OrderedDict
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['username','first_name','last_name','password','is_patient','is_doctor','is_nurse','is_assistant','is_admin']
+        fields = ['username','first_name','last_name','password','email','is_patient','is_doctor','is_nurse','is_assistant','is_admin']
         extra_kwargs ={
             'password' : {
                 'write_only':True,
