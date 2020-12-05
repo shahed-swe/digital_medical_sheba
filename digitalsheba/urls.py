@@ -24,7 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('main.urls')),
     path('', include('frontend.urls')),
-    path('', include('patient.urls')),
+    path('patient/', include('patient.urls')),
     path('auth/', obtain_auth_token),
 ]
 
