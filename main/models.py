@@ -132,6 +132,7 @@ class assignNurse(models.Model):
 class assignMedicine(models.Model):
     patient = models.OneToOneField(Patient, on_delete=models.CASCADE, primary_key=True,related_name="patient_medicine")
     medicine = models.ManyToManyField(Medicine, related_name="assign_medicine")
+    notification = models.BooleanField(default=False)
 
     class Meta:
         db_table = "assigned_medicine"
