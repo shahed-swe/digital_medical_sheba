@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'main',
     'corsheaders',
+    'frontend',
+    'patient',
 
 ]
 
@@ -59,7 +61,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
-    'https://digitalsheba.herokuapp.com/',
+    'https://digitalsheba.herokuapp.com',
 ]
 
 
