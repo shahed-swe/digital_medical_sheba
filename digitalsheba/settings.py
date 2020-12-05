@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'main',
     'corsheaders',
+    'frontend',
+    'patient',
 
 ]
 

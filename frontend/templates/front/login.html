@@ -1,0 +1,128 @@
+{%load static%}
+<!--  -->
+<!DOCTYPE html>
+<!--[if IE 9]>         <html class="no-js lt-ie10" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Login</title>
+
+    <meta name="description" content="ProUI is a Responsive Bootstrap Admin Template created by pixelcave and published on Themeforest.">
+    <meta name="author" content="pixelcave">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0">
+
+    <!-- Icons -->
+    <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
+    <link rel="shortcut icon" href="{%static 'front/'%}img/favicon.png">
+    <link rel="apple-touch-icon" href="{%static 'front/'%}img/icon57.png" sizes="57x57">
+    <link rel="apple-touch-icon" href="{%static 'front/'%}img/icon72.png" sizes="72x72">
+    <link rel="apple-touch-icon" href="{%static 'front/'%}img/icon76.png" sizes="76x76">
+    <link rel="apple-touch-icon" href="{%static 'front/'%}img/icon114.png" sizes="114x114">
+    <link rel="apple-touch-icon" href="{%static 'front/'%}img/icon120.png" sizes="120x120">
+    <link rel="apple-touch-icon" href="{%static 'front/'%}img/icon144.png" sizes="144x144">
+    <link rel="apple-touch-icon" href="{%static 'front/'%}img/icon152.png" sizes="152x152">
+    <link rel="apple-touch-icon" href="{%static 'front/'%}img/icon180.png" sizes="180x180">
+    <!-- END Icons -->
+
+    <!-- Stylesheets -->
+    <!-- Bootstrap is included in its original form, unaltered -->
+    <link rel="stylesheet" href="{%static 'front/'%}css/bootstrap.min.css">
+
+    <!-- Related styles of various icon packs and plugins -->
+    <link rel="stylesheet" href="{%static 'front/'%}css/plugins.css">
+
+    <!-- The main stylesheet of this template. All Bootstrap overwrites are defined in here -->
+    <link rel="stylesheet" href="{%static 'front/'%}css/main.css">
+
+    <!-- Include a specific file here from css/themes/ folder to alter the default theme of the template -->
+
+    <!-- The themes stylesheet of this template (for using specific theme color in individual elements - must included last) -->
+    <link rel="stylesheet" href="{%static 'front/'%}css/themes.css">
+    <!-- END Stylesheets -->
+
+    <!-- Modernizr (browser feature detection library) -->
+    <script src="{%static 'front/'%}js/vendor/modernizr.min.js"></script>
+</head>
+
+<body>
+    <!-- Login Background -->
+    <div id="login-background">
+        <!-- For best results use an image with a resolution of 2560x400 pixels (prefer a blurred image for smaller file size) -->
+        <img src="{%static 'front/'%}img/placeholders/headers/login_header.jpg" alt="Login Background" class="animation-pulseSlow">
+    </div>
+    <!-- END Login Background -->
+
+    <!-- Login Container -->
+    <div id="login-container" class="animation-fadeIn">
+        <!-- Login Title -->
+        <div class="login-title text-center">
+            <h1><i class="gi gi-send"></i> <strong>Admin</strong><br></h1>
+        </div>
+        <!-- END Login Title -->
+
+        <!-- Login Block -->
+        <div class="block push-bit">
+            <!-- Login Form -->
+            <form method="POST" class="form-horizontal form-bordered form-control-borderless">
+                {%csrf_token%}
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="gi gi-user"></i></span>
+                            <input type="text" id="login-email" name="username" class="form-control input-lg" placeholder="Username">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="gi gi-keys"></i></span>
+                            <input type="password" id="login-password" name="password" class="form-control input-lg" placeholder="Password">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-actions">
+                    <div class="col-xs-4">
+                        <label class="switch switch-primary" data-toggle="tooltip" title="Remember Me?">
+                                <input type="checkbox" id="login-remember-me" name="login-remember-me" checked>
+                                <span></span>
+                        </label>
+                    </div>
+                    <div class="col-xs-8 text-right">
+                        <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Login to Dashboard</button>
+                    </div>
+                </div>
+            </form>
+            <!-- END Login Form -->
+        </div>
+        <!-- END Login Block -->
+
+        <!-- Footer -->
+        <footer class="text-muted text-center">
+            <small><span><script>document.write(new Date().getFullYear())</script></span> &copy; <a href="https://github.com/shahed-swe" target="_blank">Admin Dashboard</a></small>
+        </footer>
+        <!-- END Footer -->
+    </div>
+    <!-- END Login Container -->
+
+    <!-- jQuery, Bootstrap.js, jQuery plugins and Custom JS code -->
+    <script src="{%static 'front/'%}js/vendor/jquery.min.js"></script>
+    <script src="{%static 'front/'%}js/vendor/bootstrap.min.js"></script>
+    <script src="{%static 'front/'%}js/plugins.js"></script>
+    <script src="{%static 'front/'%}js/app.js"></script>
+
+    <!-- Load and execute javascript code used only in this page -->
+    <script src="{%static 'front/'%}js/pages/login.js"></script>
+    <script>
+        $(function() {
+            Login.init();
+        });
+    </script>
+</body>
+
+</html>

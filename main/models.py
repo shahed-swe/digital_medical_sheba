@@ -19,6 +19,7 @@ class Patient(models.Model):
     address = models.CharField(max_length=500, blank=True, null=True)
     age = models.CharField(max_length=50, blank=True, null=True)
     phone_no = models.CharField(max_length=50, blank=True, null=True)
+    released = models.BooleanField(default=False)
 
     class Meta:
         db_table = "patient_info"
