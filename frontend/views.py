@@ -2,10 +2,13 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from main.models import *
 import requests
+from . import forms
 # Create your views here.
 def home(request):
     if not request.user.is_authenticated:
         return redirect('/login')
+    elif request.user.is_patient:
+        return redirect('patient/')
     total_user = len(User.objects.all())
     total_patient = len(Patient.objects.all())
     total_medicine = len(Medicine.objects.all())
@@ -25,6 +28,7 @@ def home(request):
     problem = total_problem()
     released = total_released_patient()
     doctors = len(Doctor.objects.all())
+    assistant = len(Assistant.objects.all())
     context = {
         "total_user": total_user,
         "total_patient":total_patient,
@@ -34,6 +38,7 @@ def home(request):
         "total_problem":problem,
         'total_released':released,
         'total_doctors':doctors,
+        'total_assistant':assistant,
         }
     return render(request, 'front/home_page.html' ,context)
 
@@ -43,7 +48,7 @@ def mylogin(request):
     if request.method == "POST":
         utxt = request.POST.get('username')
         upass = request.POST.get('password')
-        print(utxt, upass)
+        # print(utxt, upass)
         if utxt != '' and upass != '':
             user = authenticate(username=utxt, password=upass)
             if user !=  None:
@@ -73,3 +78,4 @@ def total_problem():
 def total_released_patient():
     patient = len(Patient.objects.filter(released=True))
     return patient
+

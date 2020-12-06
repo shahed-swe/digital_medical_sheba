@@ -4,5 +4,59 @@
 <!-- static loaded -->
 {%block main_content%}
 <!--  -->
-<h1>This is Registration page</h1>
+<div class="container">
+    <div class="row">
+        <h1>Login Form</h1>
+        <div class="col-12 col-lg-10 col-md-8 col-sm-10 mx-auto">
+            <form method="POST">
+                {%csrf_token%}
+                <div class="form-row">
+                    <div class="form-group col-12">
+                        <label for="">Username</label>
+                        <input type="text" name="username" id="username" class="form-control">
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="">First Name</label>
+                        <input type="text" name="first_name" id="first_name" class="form-control">
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="">Last Name</label>
+                        <input type="text" name="last_name" id="last_name" class="form-control">
+                    </div>
+                    <div class="form-group col-12">
+                        <label for="">Password</label>
+                        <input type="password" name="password1" id="password1" class="form-control">
+                    </div>
+                    <div class="form-group col-12">
+                        <label for="">Confirm Password</label>
+                        <input type="password" name="password2" id="password2" class="form-control">
+                    </div>
+                    <div class="form-group col-12">
+                        <label for="">Email Address</label>
+                        <input type="email" name="email" id="email" class="form-control">
+                    </div>
+                    <div class="form-group col-12">
+                        <label for="">Address</label>
+                        <textarea name="address" id="address" cols="5" rows="5" style="resize: none;" class="form-control"></textarea>
+                    </div>
+
+                    <div class="form-group col-6">
+                        <label for="">Age</label>
+                        <input type="text" name="age" id="age" class="form-control">
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="">Phone No</label>
+                        <input type="text" name="phone" id="phoneno" class="form-control">
+                    </div>
+                    <button class="btn btn-outline-success shadow-sm btn-block">Submit</button>
+                </div>
+            </form>
+            {%if message%}
+            <!--  -->
+            {{message}}
+            <!--  -->
+            {%endif%}
+        </div>
+    </div>
+</div>
 {%endblock main_content%}

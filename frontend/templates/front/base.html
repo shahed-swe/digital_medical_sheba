@@ -40,7 +40,13 @@
                 <div id="sidebar-scroll">
                     <div class="sidebar-content">
                         <a href="/" class="sidebar-brand">
-                            <i class="gi gi-flash"></i><span class="sidebar-nav-mini-hide"><strong>Admin</strong>Dashboard</span>
+                            {%if user.is_superuser%}
+                                <i class="gi gi-flash"></i><span class="sidebar-nav-mini-hide"><strong>Admin </strong>Dashboard</span>
+                            {%elif user.is_doctor%}
+                                <i class="gi gi-flash"></i><span class="sidebar-nav-mini-hide"><strong>Doc </strong>Dashboard</span>
+                            {%elif user.is_assistant%}
+                                <i class="gi gi-flash"></i><span class="sidebar-nav-mini-hide"><strong>Assist. </strong>Dashboard</span>
+                            {%endif%}
                         </a>
                         <div class="sidebar-section sidebar-user clearfix sidebar-nav-mini-hide">
                             <div class="sidebar-user-avatar">
@@ -61,7 +67,49 @@
                                 <a href="/" class=" active"><i class="gi gi-stopwatch sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Dashboard</span></a>
                             </li>
                             <li>
-                                <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="gi gi-shopping_cart sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">eCommerce</span></a>
+                                {%if user.is_superuser%}
+                                <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="fa fa-home sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">User Control</span></a>
+                                <ul>
+                                    <li>
+                                        <a href="page_ecom_dashboard.html">Edit / Delete patient</a>
+                                    </li>
+                                    <li>
+                                        <a href="page_ecom_orders.html">CRUD Doctor</a>
+                                    </li>
+                                    <li>
+                                        <a href="page_ecom_order_view.html">CRUD Assistant</a>
+                                    </li>
+                                    <li>
+                                        <a href="page_ecom_products.html">CRUD Nurse</a>
+                                    </li>
+                                    <li>
+                                        <a href="page_ecom_product_edit.html">Set Bill</a>
+                                    </li>
+                                    <li>
+                                        <a href="page_ecom_customer_view.html">Check Reports</a>
+                                    </li>
+                                </ul>
+                                {%elif user.is_doctor%}
+                                <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="fa fa-home sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Doc Control</span></a>
+                                <ul>
+                                    <li>
+                                        <a href="page_ecom_dashboard.html">Give Prescription</a>
+                                    </li>
+                                    <li>
+                                        <a href="page_ecom_orders.html">Patient health Check</a>
+                                    </li>
+                                    <li>
+                                        <a href="page_ecom_order_view.html">Assign Nurse</a>
+                                    </li>
+                                    <li>
+                                        <a href="page_ecom_products.html">Give Report</a>
+                                    </li>
+                                    <li>
+                                        <a href="page_ecom_product_edit.html">Feedbacks</a>
+                                    </li>
+                                </ul>
+                                {%elif user.is_assistant%}
+                                <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="fa fa-home sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Assist Control</span></a>
                                 <ul>
                                     <li>
                                         <a href="page_ecom_dashboard.html">Dashboard</a>
@@ -82,6 +130,7 @@
                                         <a href="page_ecom_customer_view.html">Customer View</a>
                                     </li>
                                 </ul>
+                                {%endif%}
                             </li>
                         </ul>
                     </div>
