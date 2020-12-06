@@ -25,6 +25,7 @@ urlpatterns = [
     path('',include('main.urls')),
     path('', include('frontend.urls')),
     path('patient/', include('patient.urls')),
+    path('nurse/',include('nurse.urls')),
     path('auth/', obtain_auth_token),
 ]
 
