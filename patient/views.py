@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from rest_framework.authtoken.models import Token
 from main.models import *
+from django.http import HttpResponse
 # Create your views here.
 def patient(request):
     if not request.user.is_authenticated:
@@ -15,13 +16,12 @@ def patient(request):
         return redirect('nurse/')
     return render(request, 'patient.html', {"title":"Patient | Home"})
 
-def login(request):
-    return render(request, 'login.html',{"title":"Login"})
 
 def registration(request):
     if request.method == "POST":
-        password1 = request.POST.get('passwrod1')
-        password2 = request.POST.get('password')
+        password1 = request.POST.get('password1')
+        password2 = request.POST.get('password2')
+        print(password1, password2)
         if password1 == password2:
             user = User(
                 username = request.POST.get('username'),
@@ -31,7 +31,7 @@ def registration(request):
                 is_patient = True,
                 is_active = True
             )
-            user.set_password(password1)
+            user.set_password(request.POST.get('password1'))
             user.save()
             patient = Patient(
                 user = user,

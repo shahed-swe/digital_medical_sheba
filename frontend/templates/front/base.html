@@ -74,13 +74,13 @@
                                         <a href="page_ecom_dashboard.html">Edit / Delete patient</a>
                                     </li>
                                     <li>
-                                        <a href="page_ecom_orders.html">CRUD Doctor</a>
+                                        <a href="/crudDoctor">CRUD Doctor</a>
                                     </li>
                                     <li>
-                                        <a href="page_ecom_order_view.html">CRUD Assistant</a>
+                                        <a href="/crudNurse">CRUD Assistant</a>
                                     </li>
                                     <li>
-                                        <a href="page_ecom_products.html">CRUD Nurse</a>
+                                        <a href="/crudAssistant">CRUD Nurse</a>
                                     </li>
                                     <li>
                                         <a href="page_ecom_product_edit.html">Set Bill</a>
@@ -320,6 +320,9 @@
 
     <!-- Load and execute javascript code used only in this page -->
     <script src="{% static 'front/' %}js/pages/index.js"></script>
+    {%block main_script%}
+    <!-- scripts -->
+    {%endblock main_script%}
     <script>
         $(function() {
             Index.init();

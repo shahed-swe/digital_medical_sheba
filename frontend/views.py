@@ -13,16 +13,19 @@ def home(request):
     total_patient = len(Patient.objects.all())
     total_medicine = len(Medicine.objects.all())
 
-    url = "https://api.openweathermap.org/data/2.5/weather?q={}&appid={}"
-    api_key = "ec47c902d7798b639246714c56a0d4ef"
-    city = 'Tangail'
-    city_weather = requests.get(url.format(city,api_key)).json()
-    # print(city_weather)
+    # url = "https://api.openweathermap.org/data/2.5/weather?q={}&appid={}"
+    # api_key = "ec47c902d7798b639246714c56a0d4ef"
+    # city = 'Tangail'
+    # city_weather = requests.get(url.format(city,api_key)).json()
+    # # print(city_weather)
+    # weather = {
+    #     'city' : city,
+    #     'temperature' : int(city_weather['main']['temp']) // 10,
+    #     'description' : city_weather['weather'][0]['description'],
+    #     'icon' : city_weather['weather'][0]['icon']
+    # }
     weather = {
-        'city' : city,
-        'temperature' : int(city_weather['main']['temp']) // 10,
-        'description' : city_weather['weather'][0]['description'],
-        'icon' : city_weather['weather'][0]['icon']
+        'temperature' : 300.56 // 10,
     }
     bill = total_bill(Bill.objects.all())
     problem = total_problem()
@@ -79,3 +82,26 @@ def total_released_patient():
     patient = len(Patient.objects.filter(released=True))
     return patient
 
+def crudDoctor(request):
+    if request.user.is_authenticated and request.user.is_superuser:
+        doctor = Doctor.objects.all()
+        context = {"title":"Manage Doctors","doc":doctor}
+        return render(request, 'front/crud_doctor.html', context)
+    else:
+        return redirect('/')
+    
+def crudNurse(request):
+    if request.user.is_authenticated and request.user.is_superuser:
+        nurse = Nurse.objects.all()
+        context = {"title":"Manage Doctors","doc":nurse}
+        return render(request, 'front/crud_nurse.html', context)
+    else:
+        return redirect('/')
+
+def crudAssistant(request):
+    if request.user.is_authenticated and request.user.is_superuser:
+        assistant = Assistant.objects.all()
+        context = {"title":"Manage Doctors","doc":assistant}
+        return render(request, 'front/crud_doctor.html', context)
+    else:
+        return redirect('/')
