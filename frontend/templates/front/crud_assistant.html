@@ -29,163 +29,76 @@
                     <div class="block-options pull-right">
                         <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default toggle-bordered enable-tooltip" data-toggle="button" title="" data-original-title="Toggles .form-bordered class">No Borders</a>
                     </div>
-                    <h2><strong>Basic Form</strong> Elements</h2>
+                    <h2><strong>Doctor's Profile</strong> Create</h2>
                 </div>
                 <!-- END Form Elements Title -->
 
                 <!-- Basic Form Elements Content -->
-                <form action="page_forms_general.html" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered" onsubmit="return false;">
+                <form method="POST" class="form-horizontal form-bordered">
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Static</label>
+                        <label class="col-md-3 control-label">Username</label>
                         <div class="col-md-9">
-                            <p class="form-control-static">Username</p>
+                            <input class="form-control" name="doctorUsername" id="username" placeholder="Enter Username" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label" for="example-text-input">Text Input</label>
+                        <label class="col-md-3 control-label" for="example-text-input">First Name</label>
                         <div class="col-md-9">
-                            <input type="text" id="example-text-input" name="example-text-input" class="form-control" placeholder="Text">
-                            <span class="help-block">This is a help text</span>
+                            <input type="text" id="firstname" name="doctorFirstname" class="form-control" placeholder="Enter First Name">
+                            <span class="help-block"><span style="color:red">*</span>must enter your firstname</span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label" for="example-email-input">Email Input</label>
+                        <label class="col-md-3 control-label" for="example-text-input">Last Name</label>
                         <div class="col-md-9">
-                            <input type="email" id="example-email-input" name="example-email-input" class="form-control" placeholder="Enter Email">
-                            <span class="help-block">Please enter your email</span>
+                            <input type="text" id="lastname" name="doctorLastname" class="form-control" placeholder="Enter Last Name">
+                            <span class="help-block"><span style="color:red">*</span>must enter your lastname</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="example-email-input">Email</label>
+                        <div class="col-md-9">
+                            <input type="email" id="email" name="doctorEmail" class="form-control" placeholder="Enter Email Address">
+                            <span class="help-block"><span style="color:red">*</span>please enter your email</span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="example-password-input">Password</label>
                         <div class="col-md-9">
-                            <input type="password" id="example-password-input" name="example-password-input" class="form-control" placeholder="Password">
-                            <span class="help-block">Please enter a complex password</span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label" for="example-disabled-input">Disabled Input</label>
-                        <div class="col-md-9">
-                            <input type="text" id="example-disabled-input" name="example-disabled-input" class="form-control" placeholder="Disabled" disabled="">
+                            <input type="password" id="password1" name="doctorPassword1" class="form-control" placeholder="Password">
+                            <span class="help-block"><span style="color:red">*</span>please enter a complex password</span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="example-textarea-input">Textarea</label>
                         <div class="col-md-9">
-                            <textarea id="example-textarea-input" name="example-textarea-input" rows="9" class="form-control" placeholder="Content.."></textarea>
+                            <textarea id="address" name="doctorAddress" rows="9" class="form-control" placeholder="Enter Address"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label" for="example-select">Select</label>
+                        <label class="col-md-3 control-label" for="example-email-input">Age</label>
                         <div class="col-md-9">
-                            <select id="example-select" name="example-select" class="form-control" size="1">
-                                <option value="0">Please select</option>
-                                <option value="1">Option #1</option>
-                                <option value="2">Option #2</option>
-                                <option value="3">Option #3</option>
-                            </select>
+                            <input type="text" id="age" name="doctorAge" class="form-control" placeholder="Enter Age">
+                            <span class="help-block"><span style="color:red">*</span>please enter age</span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label" for="example-multiple-select">Multiple select</label>
+                        <label class="col-md-3 control-label" for="example-email-input">Degree</label>
                         <div class="col-md-9">
-                            <select id="example-multiple-select" name="example-multiple-select" class="form-control" size="5" multiple="">
-                                <option value="1">Option #1</option>
-                                <option value="2">Option #2</option>
-                                <option value="3">Option #3</option>
-                                <option value="4">Option #4</option>
-                                <option value="5">Option #5</option>
-                                <option value="6">Option #6</option>
-                                <option value="7">Option #7</option>
-                                <option value="8">Option #8</option>
-                                <option value="9">Option #9</option>
-                                <option value="10">Option #10</option>
-                            </select>
+                            <input type="text" id="age" name="doctorDegree" class="form-control" placeholder="Enter Age">
+                            <span class="help-block"><span style="color:red">*</span>please enter degree</span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Radios</label>
+                        <label class="col-md-3 control-label" for="example-email-input">Phone No</label>
                         <div class="col-md-9">
-                            <div class="radio">
-                                <label for="example-radio1">
-                                    <input type="radio" id="example-radio1" name="example-radios" value="option1"> Option 1
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label for="example-radio2">
-                                    <input type="radio" id="example-radio2" name="example-radios" value="option2"> Option 2
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label for="example-radio3">
-                                    <input type="radio" id="example-radio3" name="example-radios" value="option3"> Option 3
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">Inline Radios</label>
-                        <div class="col-md-9">
-                            <label class="radio-inline" for="example-inline-radio1">
-                                <input type="radio" id="example-inline-radio1" name="example-inline-radios" value="option1"> One
-                            </label>
-                            <label class="radio-inline" for="example-inline-radio2">
-                                <input type="radio" id="example-inline-radio2" name="example-inline-radios" value="option2"> Two
-                            </label>
-                            <label class="radio-inline" for="example-inline-radio3">
-                                <input type="radio" id="example-inline-radio3" name="example-inline-radios" value="option3"> Three
-                            </label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">Checkboxes</label>
-                        <div class="col-md-9">
-                            <div class="checkbox">
-                                <label for="example-checkbox1">
-                                    <input type="checkbox" id="example-checkbox1" name="example-checkbox1" value="option1"> Option 1
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label for="example-checkbox2">
-                                    <input type="checkbox" id="example-checkbox2" name="example-checkbox2" value="option2"> Option 2
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label for="example-checkbox3">
-                                    <input type="checkbox" id="example-checkbox3" name="example-checkbox3" value="option3"> Option 3
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">Inline Checkboxes</label>
-                        <div class="col-md-9">
-                            <label class="checkbox-inline" for="example-inline-checkbox1">
-                                <input type="checkbox" id="example-inline-checkbox1" name="example-inline-checkbox1" value="option1"> One
-                            </label>
-                            <label class="checkbox-inline" for="example-inline-checkbox2">
-                                <input type="checkbox" id="example-inline-checkbox2" name="example-inline-checkbox2" value="option2"> Two
-                            </label>
-                            <label class="checkbox-inline" for="example-inline-checkbox3">
-                                <input type="checkbox" id="example-inline-checkbox3" name="example-inline-checkbox3" value="option3"> Three
-                            </label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label" for="example-file-input">File input</label>
-                        <div class="col-md-9">
-                            <input type="file" id="example-file-input" name="example-file-input">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label" for="example-file-multiple-input">Multiple File input</label>
-                        <div class="col-md-9">
-                            <input type="file" id="example-file-multiple-input" name="example-file-multiple-input" multiple="">
+                            <input type="email" id="email" name="doctorPhoneno" class="form-control" placeholder="Enter Phone Number">
+                            <span class="help-block"><span style="color:red">*</span>please enter phone no</span>
                         </div>
                     </div>
                     <div class="form-group form-actions">
                         <div class="col-md-9 col-md-offset-3">
                             <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Submit</button>
-                            <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Reset</button>
                         </div>
                     </div>
                 </form>
