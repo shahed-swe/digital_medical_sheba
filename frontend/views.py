@@ -84,6 +84,40 @@ def total_released_patient():
     patient = len(Patient.objects.filter(released=True))
     return patient
 
+def patient(request):
+    patient = Patient.objects.all()
+    return render(request, 'front/patient_control.html', {"title":"Patient","patient":patient})
+
+def edit_patient(request, id):
+    patient = Patient.objects.filter(pk=id)
+    user = User.objects.get(pk=id)
+    print(user)
+    print(patient)
+    if request.method == "POST":
+        doctor = Doctor(
+            user=user,
+            full_name=user.first_name+' '+user.last_name,
+            address=request.POST.get('doctorAddress'),
+            age=request.POST.get('doctorAge'),
+            degree=request.POST.get('doctorDegree'),
+            phone_no=request.POST.get('doctorPhoneno')
+        )
+        doctor.save()
+        return redirect('/patient')
+    return render(request, 'front/edit_patient_view.html',{"title":"Edit","patient":patient})
+
+
+def delete_patient(request, id):
+    patient = Patient.objects.filter(pk=id)
+    user = User.objects.filter(pk=id)
+    if request.method == "POST":
+        val = request.POST.get('button-value')
+        if val == "Yes":
+            patient.delete()
+            user.delete()
+            return redirect('/patient')
+    return render(request, 'front/delete_patient_view.html', {"title": "Delete","patient":patient})
+
 def crudDoctor(request):
     if request.user.is_authenticated and request.user.is_superuser:
         doctor = Doctor.objects.all()
@@ -141,7 +175,7 @@ def delete_doctor(request, id):
             doc.delete()
             user.delete()
             return redirect('/crudDoctor')
-    return render(request, 'front/doctor_delete_view.html',{"title":"Delete"})
+    return render(request, 'front/doctor_delete_view.html',{"title":"Delete","doc":doc})
 
 def crudNurse(request):
     if request.user.is_authenticated and request.user.is_superuser:
