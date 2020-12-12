@@ -1,8 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_list_or_404, get_object_or_404, render, redirect
 from django.contrib.auth import authenticate, login, logout
 from main.models import *
+from rest_framework.authtoken.models import Token
 import requests
 from . import forms
+from django.http import JsonResponse
 # Create your views here.
 def home(request):
     if not request.user.is_authenticated:
@@ -86,10 +88,61 @@ def crudDoctor(request):
     if request.user.is_authenticated and request.user.is_superuser:
         doctor = Doctor.objects.all()
         context = {"title":"Manage Doctors","doc":doctor}
+        if request.method == "POST":
+            user = User(
+                username = request.POST.get('doctorUsername'),
+                first_name = request.POST.get('doctorFirstname'),
+                last_name = request.POST.get('doctorLastname'),
+                email = request.POST.get('doctorEmail'),
+                is_doctor = True,
+                is_active = True
+            )
+            user.set_password(request.POST.get('doctorPassword1'))
+            user.save()
+            doctor = Doctor(
+                user = user,
+                full_name = user.first_name+' '+user.last_name,
+                address = request.POST.get('doctorAddress'),
+                age = request.POST.get('doctorAge'),
+                degree = request.POST.get('doctorDegree'),
+                phone_no = request.POST.get('doctorPhoneno')
+            )
+            doctor.save()
+            Token.objects.create(user=user)
+
         return render(request, 'front/crud_doctor.html', context)
     else:
         return redirect('/')
-    
+
+def edit_doctor(request, id):
+    doc = Doctor.objects.filter(pk=id)
+    user = User.objects.get(pk=id)
+    print(user)
+    print(doc)
+    if request.method == "POST":
+        doctor = Doctor(
+            user=user,
+            full_name=user.first_name+' '+user.last_name,
+            address=request.POST.get('doctorAddress'),
+            age=request.POST.get('doctorAge'),
+            degree=request.POST.get('doctorDegree'),
+            phone_no=request.POST.get('doctorPhoneno')
+        )
+        doctor.save()
+        return redirect('/crudDoctor')
+    return render(request, 'front/edit_doctor_view.html',{"title":"Edit","doc":doc})
+
+def delete_doctor(request, id):
+    doc = Doctor.objects.filter(pk=id)
+    user = User.objects.filter(pk=id)
+    if request.method == "POST":
+        val = request.POST.get('button-value')
+        if val == "Yes":
+            doc.delete()
+            user.delete()
+            return redirect('/crudDoctor')
+    return render(request, 'front/doctor_delete_view.html',{"title":"Delete"})
+
 def crudNurse(request):
     if request.user.is_authenticated and request.user.is_superuser:
         nurse = Nurse.objects.all()

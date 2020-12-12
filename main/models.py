@@ -27,6 +27,7 @@ class Patient(models.Model):
     def __str__(self):
         return self.user.first_name + ' | ' + str(self.user.last_name) +' | '+ str(self.pk)
 
+
 class Doctor(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True,related_name='doctoruser')
     user_name = models.CharField(max_length=50, blank=True, null=True)
