@@ -4,7 +4,6 @@ from main.models import *
 from rest_framework.authtoken.models import Token
 import requests
 from . import forms
-from django.http import JsonResponse
 # Create your views here.
 def home(request):
     if not request.user.is_authenticated:
@@ -85,48 +84,63 @@ def total_released_patient():
     return patient
 
 def patient(request):
-    patient = Patient.objects.all()
-    return render(request, 'front/patient_control.html', {"title":"Patient","patient":patient})
+    if not request.user.is_authenticated:
+        return redirect('/login')
+    elif request.user.is_superuser:
+        patient = Patient.objects.all()
+        return render(request, 'front/patient_control.html', {"title":"Patient","patient":patient})
+    else:
+        return redirect('/')
 
 def edit_patient(request, id):
-    pat = Patient.objects.filter(pk=id)
-    user = User.objects.get(pk=id)
-    if request.method == "POST":
-        if request.POST.get('patientRelease') == "on":
-            print(request.POST.get(''))
-            patient = Patient(
-                user=user,
-                full_name=user.first_name+' '+user.last_name,
-                address=request.POST.get('patientAddress'),
-                age=request.POST.get('patientAge'),
-                phone_no=request.POST.get('patientPhoneno'),
-                released = True
-            )
-            patient.save()
-        else:
-            patient = Patient(
-                user=user,
-                full_name=user.first_name+' '+user.last_name,
-                address=request.POST.get('patientAddress'),
-                age=request.POST.get('patientAge'),
-                phone_no=request.POST.get('patientPhoneno'),
-                released=False
-            )
-            patient.save()
-        return redirect('/patient')
-    return render(request, 'front/edit_patient_view.html',{"title":"Edit","pat":pat})
+    if not request.user.is_authenticated:
+        return redirect('/login')
+    elif request.user.is_superuser:
+        pat = Patient.objects.filter(pk=id)
+        user = User.objects.get(pk=id)
+        if request.method == "POST":
+            if request.POST.get('patientRelease') == "on":
+                print(request.POST.get(''))
+                patient = Patient(
+                    user=user,
+                    full_name=user.first_name+' '+user.last_name,
+                    address=request.POST.get('patientAddress'),
+                    age=request.POST.get('patientAge'),
+                    phone_no=request.POST.get('patientPhoneno'),
+                    released = True
+                )
+                patient.save()
+            else:
+                patient = Patient(
+                    user=user,
+                    full_name=user.first_name+' '+user.last_name,
+                    address=request.POST.get('patientAddress'),
+                    age=request.POST.get('patientAge'),
+                    phone_no=request.POST.get('patientPhoneno'),
+                    released=False
+                )
+                patient.save()
+            return redirect('/patient')
+        return render(request, 'front/edit_patient_view.html',{"title":"Edit","pat":pat})
+    else:
+        return redirect('/')
 
 
 def delete_patient(request, id):
-    patient = Patient.objects.filter(pk=id)
-    user = User.objects.filter(pk=id)
-    if request.method == "POST":
-        val = request.POST.get('button-value')
-        if val == "Yes":
-            patient.delete()
-            user.delete()
-            return redirect('/patient')
-    return render(request, 'front/delete_patient_view.html', {"title": "Delete","patient":patient})
+    if not request.user.is_authenticated:
+        return redirect('/login')
+    elif request.user.is_superuser:
+        patient = Patient.objects.filter(pk=id)
+        user = User.objects.filter(pk=id)
+        if request.method == "POST":
+            val = request.POST.get('button-value')
+            if val == "Yes":
+                patient.delete()
+                user.delete()
+                return redirect('/patient')
+        return render(request, 'front/delete_patient_view.html', {"title": "Delete","patient":patient})
+    else:
+        return redirect('/')
 
 def crudDoctor(request):
     if request.user.is_authenticated and request.user.is_superuser:
@@ -159,33 +173,39 @@ def crudDoctor(request):
         return redirect('/')
 
 def edit_doctor(request, id):
-    doc = Doctor.objects.filter(pk=id)
-    user = User.objects.get(pk=id)
-    print(user)
-    print(doc)
-    if request.method == "POST":
-        doctor = Doctor(
-            user=user,
-            full_name=user.first_name+' '+user.last_name,
-            address=request.POST.get('doctorAddress'),
-            age=request.POST.get('doctorAge'),
-            degree=request.POST.get('doctorDegree'),
-            phone_no=request.POST.get('doctorPhoneno')
-        )
-        doctor.save()
-        return redirect('/crudDoctor')
-    return render(request, 'front/edit_doctor_view.html',{"title":"Edit","doc":doc})
+    if request.user.is_authenticated and request.user.is_superuser:
+        doc = Doctor.objects.filter(pk=id)
+        user = User.objects.get(pk=id)
+        print(user)
+        print(doc)
+        if request.method == "POST":
+            doctor = Doctor(
+                user=user,
+                full_name=user.first_name+' '+user.last_name,
+                address=request.POST.get('doctorAddress'),
+                age=request.POST.get('doctorAge'),
+                degree=request.POST.get('doctorDegree'),
+                phone_no=request.POST.get('doctorPhoneno')
+            )
+            doctor.save()
+            return redirect('/crudDoctor')
+        return render(request, 'front/edit_doctor_view.html',{"title":"Edit","doc":doc})
+    else:
+        return redirect('/')
 
 def delete_doctor(request, id):
-    doc = Doctor.objects.filter(pk=id)
-    user = User.objects.filter(pk=id)
-    if request.method == "POST":
-        val = request.POST.get('button-value')
-        if val == "Yes":
-            doc.delete()
-            user.delete()
-            return redirect('/crudDoctor')
-    return render(request, 'front/doctor_delete_view.html',{"title":"Delete","doc":doc})
+    if request.user.is_authenticated and request.user.is_superuser:
+        doc = Doctor.objects.filter(pk=id)
+        user = User.objects.filter(pk=id)
+        if request.method == "POST":
+            val = request.POST.get('button-value')
+            if val == "Yes":
+                doc.delete()
+                user.delete()
+                return redirect('/crudDoctor')
+        return render(request, 'front/doctor_delete_view.html',{"title":"Delete","doc":doc})
+    else:
+        return redirect('/')
 
 def crudNurse(request):
     if request.user.is_authenticated and request.user.is_superuser:
@@ -195,10 +215,42 @@ def crudNurse(request):
     else:
         return redirect('/')
 
+def edit_nurse(request, id):
+    if request.user.is_authenticated and request.user.is_superuser:
+        nurse = Nurse.objects.filter(pk=id)
+        user = User.objects.get(pk=id)
+        return render(request, 'front/edit_nurse_view.html')
+    else:
+        return redirect('/')
+
+def delete_nurse(request, id):
+    if request.user.is_authenticated and request.user.is_superuser:
+        nurse = Nurse.objects.filter(pk=id)
+        user = User.objects.get(pk=id)
+        return render(request, 'front/delete_nurse_view.html')
+    else:
+        return redirect('/')
+
 def crudAssistant(request):
     if request.user.is_authenticated and request.user.is_superuser:
         assistant = Assistant.objects.all()
         context = {"title":"Manage Doctors","doc":assistant}
         return render(request, 'front/crud_doctor.html', context)
+    else:
+        return redirect('/')
+
+def edit_assistant(request, id):
+    if request.user.is_authenticated and request.user.is_superuser:
+        assistant = Assistant.objects.filter(pk=id)
+        user = User.objects.get(pk=id)
+        return render(request,'front/edit_assistant_view.html')
+    else:
+        return redirect('/')
+
+def delete_assistant(request, id):
+    if request.user.is_authenticated and request.user.is_superuser:
+        assistant = Assistant.objects.filter(pk=id)
+        user = User.objects.get(pk=id)
+        return render(request, 'front/delete_assistant_view.html')
     else:
         return redirect('/')
