@@ -17,4 +17,6 @@ urlpatterns = [
     url(r'^edit_nurse/(?P<id>.*)/$', views.edit_nurse, name="edit_nurse"),
     url(r'^delete_nurse/(?P<id>.*)/$', views.delete_nurse, name="delete_nurse"),
     path('crudAssistant/', views.crudAssistant, name="crudAssistant"),
+    url(r'^edit_assistant/(?P<id>.*)/$', views.edit_assistant, name="edit_assistant"),
+    url(r'^delete_assistant/(?P<id>.*)/$', views.delete_assistant, name="delete_assistant"),
 ]

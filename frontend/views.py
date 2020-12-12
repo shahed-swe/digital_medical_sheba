@@ -270,8 +270,28 @@ def delete_nurse(request, id):
 def crudAssistant(request):
     if request.user.is_authenticated and request.user.is_superuser:
         assis = Assistant.objects.all()
-        context = {"title":"Manage Doctors","assistant":assis}
-        return render(request, 'front/crud_doctor.html', context)
+        context = {"title":"Manage Assistant","assistant":assis}
+        if request.method == "POST":
+            user = User(
+                username = request.POST.get('assistantUsername'),
+                first_name = request.POST.get('assistantFirstname'),
+                last_name = request.POST.get('assistantLastname'),
+                email = request.POST.get('assistantEmail'),
+                is_assistant = True,
+                is_active = True
+            )
+            user.set_password(request.POST.get('assistantPassword1'))
+            user.save()
+            assistant = Assistant(
+                user = user,
+                full_name = user.first_name+' '+user.last_name,
+                address = request.POST.get('assistantAddress'),
+                age = request.POST.get('assistantAge'),
+                phone_no = request.POST.get('assistantPhoneno')
+            )
+            assistant.save()
+            Token.objects.create(user=user)
+        return render(request, 'front/crud_assistant.html', context)
     else:
         return redirect('/')
 
@@ -279,7 +299,17 @@ def edit_assistant(request, id):
     if request.user.is_authenticated and request.user.is_superuser:
         assis = Assistant.objects.filter(pk=id)
         user = User.objects.get(pk=id)
-        return render(request,'front/edit_assistant_view.html')
+        if request.method == "POST":
+            assistant = Assistant(
+                user = user,
+                full_name = user.first_name+ ' '+user.last_name,
+                address = request.POST.get('assistantAddress'),
+                age = request.POST.get('assistantAge'),
+                phone_no = request.POST.get('assistantPhoneno')
+            )
+            assistant.save()
+            return redirect('/crudAssistant')
+        return render(request,'front/edit_assistant_view.html',{"title":"Update Assistant","assis":assis})
     else:
         return redirect('/')
 
@@ -287,6 +317,12 @@ def delete_assistant(request, id):
     if request.user.is_authenticated and request.user.is_superuser:
         assis = Assistant.objects.filter(pk=id)
         user = User.objects.get(pk=id)
-        return render(request, 'front/delete_assistant_view.html')
+        if request.method == "POST":
+            val = request.POST.get('button-value')
+            if val == "Yes":
+                assis.delete()
+                user.delete()
+                return redirect('/crudAssistant')
+        return render(request, 'front/delete_assistant_view.html', {"title":"Assistant Update","assis":assis})
     else:
         return redirect('/')

@@ -24,30 +24,28 @@
                 <!-- Top Stats -->
                 <div class="col-md-8 col-lg-6">
                     <div class="row text-center">
-                    {%if user.is_superuser or user.is_assistant%}
+                        {%if user.is_superuser or user.is_assistant%}
                         <div class="col-xs-4 col-sm-3">
                             <h2 class="animation-hatch">
                                 <strong><i class="fa fa-child"></i> {{total_user}}</strong><br>
                                 <small><i class="fa fa-user"></i> Total User</small>
                             </h2>
                         </div>
-                    {%endif%}
-                    {%if user.is_doctor%}
+                        {%endif%} {%if user.is_doctor%}
                         <div class="col-xs-4 col-sm-3">
                             <h2 class="animation-hatch">
                                 <strong> <i class="fa fa-wheelchair"></i> {{total_patient}}</strong><br>
                                 <small><i class="fa fa-heart-o"></i> Patients</small>
                             </h2>
                         </div>
-                    {%endif%}
-                    {%if user.is_superuser or user.is_assistant or user.is_doctor%}
+                        {%endif%} {%if user.is_superuser or user.is_assistant or user.is_doctor%}
                         <div class="col-xs-4 col-sm-3">
                             <h2 class="animation-hatch">
                                 <strong>{{total_medicine}} pcs</strong><br>
                                 <small><i class="fa fa-plus-square"></i> Medicine</small>
                             </h2>
                         </div>
-                    {%endif%}
+                        {%endif%}
                         <!-- We hide the last stat to fit the other 3 on small devices -->
                         <div class="col-sm-3 hidden-xs">
                             <h2 class="animation-hatch">
@@ -82,7 +80,12 @@
                     {%elif user.is_superuser%}
                     <h3 class="widget-content text-right animation-pullDown">
                         {{total_assistant}} <strong>Assitant</strong><br>
-                        <small>Total Released</small>
+                        <small>Total Assistant</small>
+                    </h3>
+                    {%else%}
+                    <h3 class="widget-content text-right animation-pullDown">
+                        {{total_patient}} <strong>Patient</strong><br>
+                        <small>Total Inside</small>
                     </h3>
                     {%endif%}
                 </div>
