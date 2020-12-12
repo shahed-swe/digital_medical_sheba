@@ -30,7 +30,7 @@ class Patient(models.Model):
 
 class Doctor(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True,related_name='doctoruser')
-    user_name = models.CharField(max_length=50, blank=True, null=True)
+    # user_name = models.CharField(max_length=50, blank=True, null=True)
     full_name = models.CharField(max_length=50, blank=True, null=True)
     address = models.CharField(max_length=500, blank=True, null=True)
     age = models.CharField(max_length=50, blank=True, null=True)
@@ -103,6 +103,7 @@ class Feedback(models.Model):
 class Bill(models.Model):
     patient = models.OneToOneField(Patient, on_delete=models.CASCADE, primary_key=True)
     bill = models.CharField(max_length=120,blank=True,null=True)
+    paid = models.BooleanField(default=False)
 
     class Meta:
         db_table = "billing_information"

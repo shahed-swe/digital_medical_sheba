@@ -19,4 +19,5 @@ urlpatterns = [
     path('crudAssistant/', views.crudAssistant, name="crudAssistant"),
     url(r'^edit_assistant/(?P<id>.*)/$', views.edit_assistant, name="edit_assistant"),
     url(r'^delete_assistant/(?P<id>.*)/$', views.delete_assistant, name="delete_assistant"),
+    path('setbill/', views.set_bill, name="set_bill"),
 ]

@@ -4,6 +4,7 @@ from main.models import *
 from rest_framework.authtoken.models import Token
 import requests
 from . import forms
+from django.http import HttpResponse
 # Create your views here.
 def home(request):
     if not request.user.is_authenticated:
@@ -324,5 +325,12 @@ def delete_assistant(request, id):
                 user.delete()
                 return redirect('/crudAssistant')
         return render(request, 'front/delete_assistant_view.html', {"title":"Assistant Update","assis":assis})
+    else:
+        return redirect('/')
+
+# crud operations are successfully done
+def set_bill(request):
+    if request.user.is_authenticated and request.user.is_superuser:
+        return render(request, 'front/setbill.html',{"title":'Patient Bill'})
     else:
         return redirect('/')

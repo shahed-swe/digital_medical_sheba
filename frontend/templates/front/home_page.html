@@ -67,29 +67,49 @@
     <div class="row">
         <div class="col-sm-6 col-lg-3">
             <!-- Widget -->
-            <a href="page_ready_article.html" class="widget widget-hover-effect1">
+            {%if user.is_doctor%}
+            <a href="#" class="widget widget-hover-effect1">
                 <div class="widget-simple">
                     <div class="widget-icon pull-left themed-background-autumn animation-fadeIn">
                         <i class="fa fa-hand-peace-o"></i>
                     </div>
-                    {%if user.is_doctor%}
+
                     <h3 class="widget-content text-right animation-pullDown">
                         {{total_released}} <strong>Patient</strong><br>
                         <small>Total Released</small>
                     </h3>
-                    {%elif user.is_superuser%}
+
+
+                </div>
+            </a>
+            {%elif user.is_superuser%}
+            <a href="/crudAssistant" class="widget widget-hover-effect1">
+                <div class="widget-simple">
+                    <div class="widget-icon pull-left themed-background-autumn animation-fadeIn">
+                        <i class="fa fa-hand-peace-o"></i>
+                    </div>
+
                     <h3 class="widget-content text-right animation-pullDown">
                         {{total_assistant}} <strong>Assitant</strong><br>
                         <small>Total Assistant</small>
                     </h3>
-                    {%else%}
+                </div>
+            </a>
+            {%else%}
+            <a href="#" class="widget widget-hover-effect1">
+                <div class="widget-simple">
+                    <div class="widget-icon pull-left themed-background-autumn animation-fadeIn">
+                        <i class="fa fa-hand-peace-o"></i>
+                    </div>
+
                     <h3 class="widget-content text-right animation-pullDown">
                         {{total_patient}} <strong>Patient</strong><br>
                         <small>Total Inside</small>
                     </h3>
-                    {%endif%}
                 </div>
             </a>
+
+            {%endif%}
             <!-- END Widget -->
         </div>
         <div class="col-sm-6 col-lg-3">
@@ -124,7 +144,8 @@
         </div>
         <div class="col-sm-6 col-lg-3">
             <!-- Widget -->
-            <a href="page_comp_gallery.html" class="widget widget-hover-effect1">
+            {%if user.is_superuser%}
+            <a href="/crudDoctor" class="widget widget-hover-effect1">
                 <div class="widget-simple">
                     <div class="widget-icon pull-left themed-background-amethyst animation-fadeIn">
                         <i class="fa fa-user-plus"></i>
@@ -135,6 +156,31 @@
                     </h3>
                 </div>
             </a>
+            {%elif user.is_doctor%}
+            <a href="#" class="widget widget-hover-effect1">
+                <div class="widget-simple">
+                    <div class="widget-icon pull-left themed-background-amethyst animation-fadeIn">
+                        <i class="fa fa-user-plus"></i>
+                    </div>
+                    <h3 class="widget-content text-right animation-pullDown">
+                        +{{total_assistant}} <strong>Assitant</strong>
+                        <small>On Service</small>
+                    </h3>
+                </div>
+            </a>
+            {%else%}
+            <a href="#" class="widget widget-hover-effect1">
+                <div class="widget-simple">
+                    <div class="widget-icon pull-left themed-background-amethyst animation-fadeIn">
+                        <i class="fa fa-user-plus"></i>
+                    </div>
+                    <h3 class="widget-content text-right animation-pullDown">
+                        +{{total_doctors}} <strong>Doctor</strong>
+                        <small>On Service</small>
+                    </h3>
+                </div>
+            </a>
+            {%endif%}
             <!-- END Widget -->
         </div>
         <div class="col-sm-6">
@@ -145,7 +191,6 @@
                         <i class="gi gi-wallet"></i>
                     </div>
                     <div class="pull-right">
-                        <!-- Jquery Sparkline (initialized in js/pages/index.js), for more examples you can check out http://omnipotent.net/jquery.sparkline/#s-about -->
                         <span id="mini-chart-sales"></span>
                     </div>
                     <h3 class="widget-content animation-pullDown visible-lg">
