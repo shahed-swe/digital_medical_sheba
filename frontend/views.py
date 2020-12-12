@@ -89,22 +89,32 @@ def patient(request):
     return render(request, 'front/patient_control.html', {"title":"Patient","patient":patient})
 
 def edit_patient(request, id):
-    patient = Patient.objects.filter(pk=id)
+    pat = Patient.objects.filter(pk=id)
     user = User.objects.get(pk=id)
-    print(user)
-    print(patient)
     if request.method == "POST":
-        doctor = Doctor(
-            user=user,
-            full_name=user.first_name+' '+user.last_name,
-            address=request.POST.get('doctorAddress'),
-            age=request.POST.get('doctorAge'),
-            degree=request.POST.get('doctorDegree'),
-            phone_no=request.POST.get('doctorPhoneno')
-        )
-        doctor.save()
+        if request.POST.get('patientRelease') == "on":
+            print(request.POST.get(''))
+            patient = Patient(
+                user=user,
+                full_name=user.first_name+' '+user.last_name,
+                address=request.POST.get('patientAddress'),
+                age=request.POST.get('patientAge'),
+                phone_no=request.POST.get('patientPhoneno'),
+                released = True
+            )
+            patient.save()
+        else:
+            patient = Patient(
+                user=user,
+                full_name=user.first_name+' '+user.last_name,
+                address=request.POST.get('patientAddress'),
+                age=request.POST.get('patientAge'),
+                phone_no=request.POST.get('patientPhoneno'),
+                released=False
+            )
+            patient.save()
         return redirect('/patient')
-    return render(request, 'front/edit_patient_view.html',{"title":"Edit","patient":patient})
+    return render(request, 'front/edit_patient_view.html',{"title":"Edit","pat":pat})
 
 
 def delete_patient(request, id):
