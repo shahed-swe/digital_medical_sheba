@@ -176,8 +176,6 @@ def edit_doctor(request, id):
     if request.user.is_authenticated and request.user.is_superuser:
         doc = Doctor.objects.filter(pk=id)
         user = User.objects.get(pk=id)
-        print(user)
-        print(doc)
         if request.method == "POST":
             doctor = Doctor(
                 user=user,
@@ -210,38 +208,76 @@ def delete_doctor(request, id):
 def crudNurse(request):
     if request.user.is_authenticated and request.user.is_superuser:
         nurse = Nurse.objects.all()
-        context = {"title":"Manage Doctors","doc":nurse}
+        context = {"title":"Manage Nurse","nurse":nurse}
+        if request.method == "POST":
+            user = User(
+                username = request.POST.get('nurseUsername'),
+                first_name = request.POST.get('nurseFirstname'),
+                last_name = request.POST.get('nurseLastname'),
+                email = request.POST.get('nurseEmail'),
+                is_nurse = True,
+                is_active = True
+            )
+            user.set_password(request.POST.get('nursePassword1'))
+            user.save()
+            nurse = Nurse(
+                user = user,
+                full_name = user.first_name+' '+user.last_name,
+                address = request.POST.get('nurseAddress'),
+                age = request.POST.get('nurseAge'),
+                degree = request.POST.get('nurseDegree'),
+                phone_no = request.POST.get('nursePhoneno')
+            )
+            nurse.save()
+            Token.objects.create(user=user)
         return render(request, 'front/crud_nurse.html', context)
     else:
         return redirect('/')
 
 def edit_nurse(request, id):
     if request.user.is_authenticated and request.user.is_superuser:
-        nurse = Nurse.objects.filter(pk=id)
+        nur = Nurse.objects.filter(pk=id)
         user = User.objects.get(pk=id)
-        return render(request, 'front/edit_nurse_view.html')
+        if request.method == "POST":
+            nurse = Nurse(
+                user = user,
+                full_name = user.first_name+ ' '+user.last_name,
+                address = request.POST.get('nurseAddress'),
+                age = request.POST.get('nurseAge'),
+                degree = request.POST.get('nurseDegree'),
+                phone_no = request.POST.get('nursePhoneno')
+            )
+            nurse.save()
+            return redirect('/crudNurse')
+        return render(request, 'front/edit_nurse_view.html',{"title":"Edit Nurse","nur":nur})
     else:
         return redirect('/')
 
 def delete_nurse(request, id):
     if request.user.is_authenticated and request.user.is_superuser:
-        nurse = Nurse.objects.filter(pk=id)
+        nur = Nurse.objects.filter(pk=id)
         user = User.objects.get(pk=id)
+        if request.method == "POST":
+            val = request.POST.get('button-value')
+            if val == "Yes":
+                nur.delete()
+                user.delete()
+                return redirect('/crudNurse')
         return render(request, 'front/delete_nurse_view.html')
     else:
         return redirect('/')
 
 def crudAssistant(request):
     if request.user.is_authenticated and request.user.is_superuser:
-        assistant = Assistant.objects.all()
-        context = {"title":"Manage Doctors","doc":assistant}
+        assis = Assistant.objects.all()
+        context = {"title":"Manage Doctors","assistant":assis}
         return render(request, 'front/crud_doctor.html', context)
     else:
         return redirect('/')
 
 def edit_assistant(request, id):
     if request.user.is_authenticated and request.user.is_superuser:
-        assistant = Assistant.objects.filter(pk=id)
+        assis = Assistant.objects.filter(pk=id)
         user = User.objects.get(pk=id)
         return render(request,'front/edit_assistant_view.html')
     else:
@@ -249,7 +285,7 @@ def edit_assistant(request, id):
 
 def delete_assistant(request, id):
     if request.user.is_authenticated and request.user.is_superuser:
-        assistant = Assistant.objects.filter(pk=id)
+        assis = Assistant.objects.filter(pk=id)
         user = User.objects.get(pk=id)
         return render(request, 'front/delete_assistant_view.html')
     else:
