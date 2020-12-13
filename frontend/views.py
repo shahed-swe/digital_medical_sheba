@@ -371,3 +371,21 @@ def edit_bill(request, id):
         return render(request, 'front/edit_bill.html', {"title":"Edit Bill", "bill":bill})
     else:
         return redirect('/')
+
+def delete_bill(request, id):
+    if request.user.is_authenticated and request.user.is_superuser:
+        bill = Bill.objects.filter(pk=id)
+        if request.method == "POST":
+            val = request.POST.get('button-value')
+            if val == "Yes":
+                bill.delete()
+                return redirect('/setbill')
+        return render(request, 'front/delete_bill.html', {"bill":bill})
+    else:
+        return redirect('/')
+
+def report_feedback(request):
+    if request.user.is_authenticated and request.user.is_superuser:
+        return render(request, 'front/reports.html')
+    else:
+        return redirect('/')
