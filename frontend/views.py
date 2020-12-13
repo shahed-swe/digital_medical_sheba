@@ -453,14 +453,26 @@ def control_info(request):
 
 def delete_assigned_doctor(request, id):
     if request.user.is_authenticated and request.user.is_superuser:
-        return HttpResponse("Hello Doctor {}".format(id))
+        assign_doctor = assignedDoctor.objects.filter(pk=id)
+        if request.method == "POST":
+            val = request.POST.get('button-value')
+            if val == "Yes":
+                assign_doctor.delete()
+                return redirect('/control_info')
+        return render(request, 'front/delete_assigned_doctor.html')
     else:
         return redirect('/')
 
 
 def delete_assigned_assistant(request, id):
     if request.user.is_authenticated and request.user.is_superuser:
-        return HttpResponse("Hello Assistant {}".format(id))
+        assign_assistant = assignAssistant.objects.filter(pk=id)
+        if request.method == "POST":
+            val = request.POST.get('button-value')
+            if val == "Yes":
+                assign_assistant.delete()
+                return redirect('/control_info')
+        return render(request, 'front/delete_assigned_assistant.html')
     else:
         return redirect('/')
 
