@@ -417,6 +417,38 @@ def delete_report(request, id):
     else:
         return redirect('/')
 
+def control_info(request):
+    if request.user.is_authenticated and request.user.is_superuser:
+        doc = Doctor.objects.all()
+        pat = Patient.objects.all()
+        assis = Assistant.objects.all()
+        newdoc = assignedDoctor.objects.all()
+        newass = assignAssistant.objects.all()
+        context = {"title":"Control Info","doc":doc,"pat":pat,"assis":assis,"newdoc":newdoc,"newass":newass}
+        if request.method == "POST":
+            if request.POST.get('assigndoctor') == "1":
+                doctor = request.POST.get('doctor1')
+                patient = request.POST.get('patient1')
+                if doctor != "" and patient != "":
+                    assigndoc = assignedDoctor(
+                        patient = Patient.objects.get(pk=patient),
+                        doctor = Doctor.objects.get(pk=doctor)
+                    )
+                    assigndoc.save()
+                    return redirect('/control_info')
+            elif request.POST.get('assignassistant') == "2":
+                doctor = request.POST.get('doctor2')
+                assistant = request.POST.get('assistant1')
+                if doctor != "" and assistant != "":
+                    assignassis = assignAssistant(
+                        doctor = Doctor.objects.get(pk=doctor),
+                        assistant = Assistant.objects.get(pk=assistant)
+                    )
+                    assignassis.save()
+                    return redirect('/control_info')
+        return render(request, 'front/control_info.html',context)
+    else:
+        return redirect('/')
 
 def give_prescription(request):
     if request.user.is_authenticated and request.user.is_doctor:
