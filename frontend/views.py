@@ -450,11 +450,6 @@ def control_info(request):
     else:
         return redirect('/')
 
-def edit_assigned_doctor(request, id):
-    if request.user.is_authenticated and request.user.is_superuser:
-        return HttpResponse("Hello Doctor {}".format(id))
-    else:
-        return redirect('/')
 
 def delete_assigned_doctor(request, id):
     if request.user.is_authenticated and request.user.is_superuser:
@@ -462,11 +457,6 @@ def delete_assigned_doctor(request, id):
     else:
         return redirect('/')
 
-def edit_assigned_assistant(request, id):
-    if request.user.is_authenticated and request.user.is_superuser:
-        return HttpResponse("Hello Assistant {}".format(id))
-    else:
-        return redirect('/')
 
 def delete_assigned_assistant(request, id):
     if request.user.is_authenticated and request.user.is_superuser:

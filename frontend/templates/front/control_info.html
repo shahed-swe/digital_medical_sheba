@@ -26,6 +26,9 @@
             <div class="block">
                 <!-- Basic Form Elements Title -->
                 <div class="block-title">
+                    <div class="block-options pull-right">
+                        <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default toggle-bordered enable-tooltip" data-toggle="button" title="" data-original-title="Toggles .form-bordered class">Add / Update</a>
+                    </div>
                     <h2><strong>Assign</strong> Doctor</h2>
                 </div>
                 <!-- END Form Elements Title -->
@@ -71,6 +74,9 @@
             <div class="block">
                 <!-- Basic Form Elements Title -->
                 <div class="block-title">
+                    <div class="block-options pull-right">
+                        <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default toggle-bordered enable-tooltip" data-toggle="button" title="" data-original-title="Toggles .form-bordered class">Add / Update</a>
+                    </div>
                     <h2><strong>Assign</strong> Assistant</h2>
                 </div>
                 <!-- END Form Elements Title -->
@@ -138,7 +144,6 @@
                                 <td><a href="javascript:void(0)">{{i.patient.full_name | title}}</a></td>
                                 <td class="text-center">
                                     <div class="btn-group">
-                                        <a href="{% url 'edit_assigned_doctor' id=i.pk %}" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
                                         <a href="{% url 'delete_assigned_doctor' id=i.pk %}" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
                                     </div>
                                 </td>
@@ -174,7 +179,6 @@
                                 <td><a href="javascript:void(0)">{{i.assistant.full_name | title}}</a></td>
                                 <td class="text-center">
                                     <div class="btn-group">
-                                        <a href="{% url 'edit_assigned_assistant' id=i.pk %}" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
                                         <a href="{% url 'delete_assigned_assistant' id=i.pk %}" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
                                     </div>
                                 </td>
