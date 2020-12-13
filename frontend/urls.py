@@ -20,4 +20,5 @@ urlpatterns = [
     url(r'^edit_assistant/(?P<id>.*)/$', views.edit_assistant, name="edit_assistant"),
     url(r'^delete_assistant/(?P<id>.*)/$', views.delete_assistant, name="delete_assistant"),
     path('setbill/', views.set_bill, name="set_bill"),
+    url(r'^edit_bill/(?P<id>.*)/$', views.edit_bill, name="edit_bill")
 ]

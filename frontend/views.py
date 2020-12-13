@@ -101,7 +101,6 @@ def edit_patient(request, id):
         user = User.objects.get(pk=id)
         if request.method == "POST":
             if request.POST.get('patientRelease') == "on":
-                print(request.POST.get(''))
                 patient = Patient(
                     user=user,
                     full_name=user.first_name+' '+user.last_name,
@@ -331,6 +330,44 @@ def delete_assistant(request, id):
 # crud operations are successfully done
 def set_bill(request):
     if request.user.is_authenticated and request.user.is_superuser:
-        return render(request, 'front/setbill.html',{"title":'Patient Bill'})
+        patient = Patient.objects.all()
+        bill = Bill.objects.all()
+        if request.method == "POST":
+            pat1 = request.POST.get('patient')
+            bill2 = request.POST.get('bill')
+            if pat1 != "" and bill != "":
+                pat2 = Patient.objects.get(pk=pat1)
+                bill2 = Bill(
+                    patient = pat2,
+                    bill = bill2,
+                    paid = False
+                )
+                bill2.save()
+        return render(request, 'front/setbill.html',{"title":'Patient Bill',"bill":bill, "pat":patient})
+    else:
+        return redirect('/')
+
+def edit_bill(request, id):
+    if request.user.is_authenticated and request.user.is_superuser:
+        bill = Bill.objects.filter(pk=id)
+        if request.method == "POST":
+            if request.POST.get('paid') == 'on':
+                patient = Patient.objects.get(pk=id)
+                bill = Bill(
+                    patient=patient,
+                    bill=request.POST.get('patientBill'),
+                    paid=True
+                )
+                bill.save()
+            else:
+                patient = Patient.objects.get(pk=id)
+                bill = Bill(
+                    patient=patient,
+                    bill=request.POST.get('patientBill'),
+                    paid=False
+                )
+                bill.save()
+            return redirect('/setbill')
+        return render(request, 'front/edit_bill.html', {"title":"Edit Bill", "bill":bill})
     else:
         return redirect('/')

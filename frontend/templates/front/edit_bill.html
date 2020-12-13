@@ -1,0 +1,68 @@
+{%extends 'front/base.html'%}
+<!-- extended base -->
+{%load static%}
+<!-- static loaded -->
+{%block main_content%}
+<!-- main contet starts-->
+<style>
+    .form-horizontal {
+        margin-bottom: 1000px;
+    }
+</style>
+<div class="row">
+    <div class="col-md-12">
+        <!-- Basic Form Elements Block -->
+        <div class="block">
+            <!-- Basic Form Elements Title -->
+            <div class="block-title">
+                <div class="block-options pull-right">
+                    {%for i in bill%}
+                    <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default toggle-bordered enable-tooltip" data-toggle="button" title="" data-original-title="Toggles .form-bordered class">Full Name: {{i.patient.full_name | title}}</a>
+                    <!--  -->
+                    {%endfor%}
+                </div>
+                <h2><strong>Patient's Profile</strong> Update</h2>
+            </div>
+            <!-- END Form Elements Title -->
+
+            <!-- Basic Form Elements Content -->
+            <form method="POST" class="form-horizontal form-bordered">
+                {%csrf_token%}
+                <!--  -->
+                {%for i in bill%}
+                <div class="form-group ">
+                    <label class="col-md-3 control-label " for="example-email-input ">Bill</label>
+                    <div class="col-md-9 ">
+                        <input type="text " id="email " name="patientbill" class="form-control " placeholder="Enter Phone Number " value="{{i.bill}}">
+                        <span class="help-block "><span style="color:red ">*</span>please enter payables</span>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <label class="col-md-3 control-label " for="example-email-input ">Paid/Not Paid</label>
+                    <div class="col-md-9 ">
+                        <!--  -->
+                        {%if i.paid == True%}
+                        <!--  -->
+                        <label class="switch switch-primary"><input type="checkbox" id="checkbox" name="paid" checked><span></span></label>
+                        <!--  -->
+                        {%else%}
+                        <!--  -->
+                        <label class="switch switch-primary"><input type="checkbox" id="checkbox" name="paid"><span></span></label>
+                        <!--  -->
+                        {%endif%}
+                    </div>
+                </div>
+                <div class="form-group form-actions ">
+                    <div class="col-md-9 col-md-offset-3 ">
+                        <button type="submit " class="btn btn-sm btn-primary "><i class="fa fa-angle-right "></i> Submit</button>
+                    </div>
+                </div>
+                {%endfor%}
+            </form>
+            <!-- END Basic Form Elements Content -->
+        </div>
+        <!-- END Basic Form Elements Block -->
+    </div>
+</div>
+<!-- main content ends here -->
+{%endblock main_content%}
