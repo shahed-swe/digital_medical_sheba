@@ -30,4 +30,8 @@ urlpatterns = [
     path('assign_nurse/',views.assign_nurse, name="assign_nurse"),
     path('give_report/',views.give_report, name="give_report"),
     path('control_info/',views.control_info, name="control_info"),
+    url(r'^edit_assigned_doctor/(?P<id>.*)/$', views.edit_assigned_doctor, name="edit_assigned_doctor"),
+    url(r'^delete_assigned_doctor/(?P<id>.*)/$',views.delete_assigned_doctor, name="delete_assigned_doctor"),
+    url(r'^edit_assigned_assistant/(?P<id>.*)/$',views.edit_assigned_assistant, name="edit_assigned_assistant"),
+    url(r'^delete_assigned_assistant/(?P<id>.*)/$',views.delete_assigned_assistant, name="delete_assigned_assistant"),
 ]

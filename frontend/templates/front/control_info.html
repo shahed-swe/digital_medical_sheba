@@ -138,8 +138,8 @@
                                 <td><a href="javascript:void(0)">{{i.patient.full_name | title}}</a></td>
                                 <td class="text-center">
                                     <div class="btn-group">
-                                        <a href="{% url 'edit_doctor' id=i.pk %}" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
-                                        <a href="{% url 'delete_doctor' id=i.pk %}" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
+                                        <a href="{% url 'edit_assigned_doctor' id=i.pk %}" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
+                                        <a href="{% url 'delete_assigned_doctor' id=i.pk %}" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
                                     </div>
                                 </td>
                             </tr>
@@ -174,8 +174,8 @@
                                 <td><a href="javascript:void(0)">{{i.assistant.full_name | title}}</a></td>
                                 <td class="text-center">
                                     <div class="btn-group">
-                                        <a href="{% url 'edit_doctor' id=i.pk %}" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
-                                        <a href="{% url 'delete_doctor' id=i.pk %}" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
+                                        <a href="{% url 'edit_assigned_assistant' id=i.pk %}" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
+                                        <a href="{% url 'delete_assigned_assistant' id=i.pk %}" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
                                     </div>
                                 </td>
                             </tr>
