@@ -355,7 +355,7 @@ def edit_bill(request, id):
                 patient = Patient.objects.get(pk=id)
                 bill = Bill(
                     patient=patient,
-                    bill=request.POST.get('patientBill'),
+                    bill=request.POST.get('patientbill'),
                     paid=True
                 )
                 bill.save()
@@ -363,7 +363,7 @@ def edit_bill(request, id):
                 patient = Patient.objects.get(pk=id)
                 bill = Bill(
                     patient=patient,
-                    bill=request.POST.get('patientBill'),
+                    bill=request.POST.get('patientbill'),
                     paid=False
                 )
                 bill.save()
@@ -385,7 +385,59 @@ def delete_bill(request, id):
         return redirect('/')
 
 def report_feedback(request):
-    if request.user.is_authenticated and request.user.is_superuser:
-        return render(request, 'front/reports.html')
+    if request.user.is_authenticated and request.user.is_superuser or request.user.is_doctor:
+        feed = Feedback.objects.all()
+        report = ReportProblem.objects.all()
+        context = {"feed":feed, "report":report}
+        return render(request, 'front/reports.html',context)
+    else:
+        return redirect('/')
+
+def delete_feedback(request, id):
+    if request.user.is_authenticated and request.user.is_superuser or request.user.is_doctor:
+        feed = Feedback.objects.filter(pk=id)
+        if request.method == "POST":
+            val = request.POST.get('button-value')
+            if val == "Yes":
+                feed.delete()
+                return redirect('/reports_and_feedbacks')
+        return render(request, 'front/delete_feedback.html', {"feed":feed})
+    else:
+        return redirect('/')
+
+def delete_report(request, id):
+    if request.user.is_authenticated and request.user.is_superuser or request.user.is_doctor:
+        report = ReportProblem.objects.filter(pk=id)
+        if request.method == "POST":
+            val = request.POST.get('button-value')
+            if val == "Yes":
+                report.delete()
+                return redirect('/reports_and_feedbacks')
+        return render(request, 'front/delete_report.html', {"report":report})
+    else:
+        return redirect('/')
+
+
+def give_prescription(request):
+    if request.user.is_authenticated and request.user.is_doctor:
+        return HttpResponse("Hello")
+    else:
+        return redirect('/')
+
+def patient_health(request):
+    if request.user.is_authenticated and request.user.is_doctor:
+        return HttpResponse("Hello")
+    else:
+        return redirect('/')
+
+def assign_nurse(request):
+    if request.user.is_authenticated and request.user.is_doctor:
+        return HttpResponse("Hello")
+    else:
+        return redirect('/')
+
+def give_report(request):
+    if request.user.is_authenticated and request.user.is_doctor:
+        return HttpResponse("Hello")
     else:
         return redirect('/')

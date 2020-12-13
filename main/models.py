@@ -97,7 +97,7 @@ class Feedback(models.Model):
         db_table = "feedback_section"
     
     def __str__(self):
-        return self.feedback + ' | '+ str(self.user.full_name)
+        return self.feedback + ' | '+ str(self.patient.full_name)
 
 
 class Bill(models.Model):

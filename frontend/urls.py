@@ -21,5 +21,13 @@ urlpatterns = [
     url(r'^delete_assistant/(?P<id>.*)/$', views.delete_assistant, name="delete_assistant"),
     path('setbill/', views.set_bill, name="set_bill"),
     url(r'^edit_bill/(?P<id>.*)/$', views.edit_bill, name="edit_bill"),
-    url(r'^delete_bill/(?P<id>.*)/$', views.delete_bill, name="delete_bill")
+    url(r'^delete_bill/(?P<id>.*)/$', views.delete_bill, name="delete_bill"),
+    path('reports_and_feedbacks/', views.report_feedback, name="report_feedback"),
+    url(r'^delete_feedback/(?P<id>.*)/$', views.delete_feedback, name="delete_feedback"),
+    url(r'^delete_report/(?P<id>.*)/$', views.delete_report, name="delete_report"),
+    path('give_prescription/', views.give_prescription,name="give_prescription"),
+    path('patient_health/', views.patient_health, name="patient_health"),
+    path('assign_nurse/',views.assign_nurse, name="assign_nurse"),
+    path('give_report/',views.give_report, name="give_report"),
+
 ]
