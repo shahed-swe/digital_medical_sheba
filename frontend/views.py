@@ -16,20 +16,20 @@ def home(request):
     total_patient = len(Patient.objects.all())
     total_medicine = len(Medicine.objects.all())
 
-    # url = "https://api.openweathermap.org/data/2.5/weather?q={}&appid={}"
-    # api_key = "ec47c902d7798b639246714c56a0d4ef"
-    # city = 'Tangail'
-    # city_weather = requests.get(url.format(city,api_key)).json()
-    # # print(city_weather)
-    # weather = {
-    #     'city' : city,
-    #     'temperature' : int(city_weather['main']['temp']) // 10,
-    #     'description' : city_weather['weather'][0]['description'],
-    #     'icon' : city_weather['weather'][0]['icon']
-    # }
+    url = "https://api.openweathermap.org/data/2.5/weather?q={}&appid={}"
+    api_key = "ec47c902d7798b639246714c56a0d4ef"
+    city = 'Tangail'
+    city_weather = requests.get(url.format(city,api_key)).json()
+    # print(city_weather)
     weather = {
-        'temperature' : 300.56 // 10,
+        'city' : city,
+        'temperature' : int(city_weather['main']['temp']) // 10,
+        'description' : city_weather['weather'][0]['description'],
+        'icon' : city_weather['weather'][0]['icon']
     }
+    # weather = {
+    #     'temperature' : 300.56 // 10,
+    # }
     bill = total_bill(Bill.objects.all())
     problem = total_problem()
     released = total_released_patient()
