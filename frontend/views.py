@@ -47,6 +47,12 @@ def home(request):
         }
     return render(request, 'front/home_page.html' ,context)
 
+def user_profile(request):
+    if request.user.is_authenticated:
+        return render(request, 'front/user_profile.html',{"title":"User Profile"})
+    else:
+        return redirect('/login')
+
 def mylogin(request):
     if request.user.is_authenticated:
         return redirect('/')
