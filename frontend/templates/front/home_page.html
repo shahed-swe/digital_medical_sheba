@@ -17,6 +17,8 @@
                     <h1>Welcome Doc Mr. <strong>{{user.first_name | title}} {{user.last_name | title}}</strong><br><small>You Look Awesome!</small></h1>
                     {%elif user.is_assistant%}
                     <h1>Welcome Mr. <strong>{{user.first_name | title}} {{user.last_name | title}}</strong><br><small>You Look Awesome!</small></h1>
+                    {%elif user.is_nurse%}
+                    <h1>Welcome Mrs. <strong>{{user.first_name | title}} {{user.last_name | title}}</strong><br><small>You Look Awesome!</small></h1>
                     {%endif%}
                 </div>
                 <!-- END Main Title -->
@@ -24,21 +26,21 @@
                 <!-- Top Stats -->
                 <div class="col-md-8 col-lg-6">
                     <div class="row text-center">
-                        {%if user.is_superuser or user.is_assistant%}
+                        {%if user.is_superuser or user.is_assistant or user.is_nurse%}
                         <div class="col-xs-4 col-sm-3">
                             <h2 class="animation-hatch">
                                 <strong><i class="fa fa-child"></i> {{total_user}}</strong><br>
                                 <small><i class="fa fa-user"></i> Total User</small>
                             </h2>
                         </div>
-                        {%endif%} {%if user.is_doctor%}
+                        {%endif%} {%if user.is_doctor or user.is_nurse%}
                         <div class="col-xs-4 col-sm-3">
                             <h2 class="animation-hatch">
                                 <strong> <i class="fa fa-wheelchair"></i> {{total_patient}}</strong><br>
                                 <small><i class="fa fa-heart-o"></i> Patients</small>
                             </h2>
                         </div>
-                        {%endif%} {%if user.is_superuser or user.is_assistant or user.is_doctor%}
+                        {%endif%} {%if user.is_superuser or user.is_assistant or user.is_doctor or user.is_nurse%}
                         <div class="col-xs-4 col-sm-3">
                             <h2 class="animation-hatch">
                                 <strong>{{total_medicine}} pcs</strong><br>
