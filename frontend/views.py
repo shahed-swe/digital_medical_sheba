@@ -523,7 +523,10 @@ def medicine_company_add(request):
 def edit_medicine_company(request,id):
     if request.user.is_authenticated and request.user.is_assistant:
         cmp = MedicineCompany.objects.filter(pk=id)
-        return HttpResponse("hello {}".format(id))
+        if request.method == "POST":
+            cmp = MedicineCompany.objects.filter(pk=id).update(company_name=request.POST.get('companyName'))
+            return redirect('/company')
+        return render(request, 'front/edit_medicine_company.html',{"title":"Update","cmp":cmp[0]})
     else:
         return redirect('/')
 
@@ -531,7 +534,11 @@ def edit_medicine_company(request,id):
 def delete_medicine_company(request, id):
     if request.user.is_authenticated and request.user.is_assistant:
         cmp = MedicineCompany.objects.filter(pk=id)
-        return HttpResponse("hello {}".format(id))
+        if request.method == "POST":
+            val = request.POST.get('button-value')
+            cmp.delete()
+            return  redirect('/company')
+        return render(request, 'front/delete_medicine_company.html',{"title":"Delete","cmp":cmp[0]})
     else:
         return redirect('/')
 
