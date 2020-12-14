@@ -542,6 +542,38 @@ def delete_medicine_company(request, id):
     else:
         return redirect('/')
 
+# medicine crud view, only available for assistant
+def add_medicine(request):
+    if request.user.is_authenticated and request.user.is_assistant:
+        med = Medicine.objects.all()
+        company = MedicineCompany.objects.all()
+        context = {"title":"Add Medicine","med":med,"cmp":company}
+        if request.method == "POST":
+            comp = request.POST.getlist('companies')
+            newcomp = [int(i) for i in comp if i != None]
+            medicine = Medicine(
+                medicine_name = request.POST.get('medicineName'),
+            )
+            medicine.save()
+            for i in newcomp:
+                medicine.company_name.add(i)
+            return redirect('/medicine')
+        return render(request, 'front/add_medicine.html',context)
+    else:
+        return redirect('/')
+
+# delete medicine view, only available for assistant
+def delete_medicine(request, id):
+    if request.user.is_authenticated and request.user.is_assistant:
+        med = Medicine.objects.filter(pk=id)
+        if request.method == 'POST':
+            val = request.POST.get('button-value')
+            med.delete()
+            return redirect('/medicine')
+        return render(request, 'front/delete_medicine.html',{"title":"Delete","med":med[0]})
+    else:
+        return redirect('/')
+
 def give_prescription(request):
     if request.user.is_authenticated and request.user.is_doctor:
         return HttpResponse("Hello")

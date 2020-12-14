@@ -29,7 +29,7 @@
                     <div class="block-options pull-right">
                         <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default toggle-bordered enable-tooltip" data-toggle="button" title="" data-original-title="Toggles .form-bordered class">No Borders</a>
                     </div>
-                    <h2><strong>Medicine Company</strong> Create</h2>
+                    <h2><strong>Medicine</strong> Add</h2>
                 </div>
                 <!-- END Form Elements Title -->
 
@@ -37,11 +37,22 @@
                 <form method="POST" class="form-horizontal form-bordered">
                     {%csrf_token%}
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Company</label>
+                        <label class="col-md-3 control-label">Medicine</label>
                         <div class="col-md-9">
-                            <input class="form-control" name="companyName" id="username" placeholder="Enter Comapany Name" />
+                            <input class="form-control" name="medicineName" id="username" placeholder="Enter medicine Name" />
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Medicine</label>
+                        <div class="col-md-9">
+                            <select name="companies" id="company" class="form-control" multiple>
+                                {%for i in cmp%}
+                                <option value="{{i.id}}">{{i.company_name}}</option>
+                                {%endfor%}
+                            </select>
+                        </div>
+                    </div>
+
                     <div class="form-group form-actions">
                         <div class="col-md-9 col-md-offset-3">
                             <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Submit</button>
@@ -55,26 +66,32 @@
     </div>
     <div class="block full">
         <div class="block-title">
-            <h2><strong>Medicine</strong> Companies</h2>
+            <h2><strong>Nurses</strong> Profile</h2>
         </div>
         <div class="table-responsive">
             <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
                 <thead>
                     <tr>
                         <th class="text-center">ID</th>
+                        <th>medicine</th>
                         <th>Company</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {%for i in cmp%}
+                    {%for i in med%}
                     <tr>
                         <td class="text-center">{{i.id}}</td>
-                        <td><a href="javascript:void(0)">{{i.company_name | title}}</a></td>
+                        <td><a href="javascript:void(0)">{{i.medicine_name | title}}</a></td>
+                        <td>
+                            {%for j in i.company_name.all%}
+                            <span class="text-center label label-success">{{j.company_name}}</span>
+                            <!--  -->
+                            {%endfor%}
+                        </td>
                         <td class="text-center">
                             <div class="btn-group">
-                                <a href="{% url 'edit_medicine_company' id=i.pk %}" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
-                                <a href="{% url 'delete_medicine_company' id=i.pk %}" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
+                                <a href="{% url 'delete_medicine' id=i.pk %}" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
                             </div>
                         </td>
                     </tr>
