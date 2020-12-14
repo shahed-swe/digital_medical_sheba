@@ -33,4 +33,8 @@ urlpatterns = [
     path('control_info/',views.control_info, name="control_info"),
     url(r'^delete_assigned_doctor/(?P<id>.*)/$',views.delete_assigned_doctor, name="delete_assigned_doctor"),
     url(r'^delete_assigned_assistant/(?P<id>.*)/$',views.delete_assigned_assistant, name="delete_assigned_assistant"),
+    path('company/', views.medicine_company_add, name="medicine_company_add"),
+    url(r'^edit_medicine_company/(?P<id>.*)/$', views.edit_medicine_company, name="edit_medicine_company"),
+    url(r'^delete_medicine_company/(?P<id>.*)/$', views.delete_medicine_company, name="delete_medicine_company"),
+    
 ]

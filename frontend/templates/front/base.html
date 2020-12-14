@@ -122,6 +122,19 @@
                                         <a href="page_ecom_orders.html">Medicine</a>
                                     </li>
                                 </ul>
+                                {%elif user.is_nurse%}
+                                <a href="#" class="sidebar-nav-menu"><i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i><i class="fa fa-home sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Nurse Control</span></a>
+                                <ul>
+                                    <li>
+                                        <a href="page_ecom_dashboard.html">Get Patient Info</a>
+                                    </li>
+                                    <li>
+                                        <a href="page_ecom_orders.html">Assigned Medicines</a>
+                                    </li>
+                                    <li>
+                                        <a href="page_ecom_orders.html">Patient Report</a>
+                                    </li>
+                                </ul>
                                 {%endif%}
                             </li>
                         </ul>

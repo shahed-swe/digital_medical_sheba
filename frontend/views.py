@@ -6,6 +6,7 @@ import requests
 from . import forms
 from django.http import HttpResponse
 # Create your views here.
+# for admin panel
 def home(request):
     if not request.user.is_authenticated:
         return redirect('/login')
@@ -47,12 +48,13 @@ def home(request):
         }
     return render(request, 'front/home_page.html' ,context)
 
+#for all type of users
 def user_profile(request):
     if request.user.is_authenticated:
         return render(request, 'front/user_profile.html',{"title":"User Profile"})
     else:
         return redirect('/login')
-
+# for all type of users
 def mylogin(request):
     if request.user.is_authenticated:
         return redirect('/')
@@ -70,26 +72,31 @@ def mylogin(request):
     context = {"title":"Login"}
     return render(request, 'front/login.html', context)
 
+#for all type of users
 def mylogout(request):
     logout(request)
     return redirect('/login')
 
+#for some perticuler users, this are not counted as view
 def total_bill(take):
     bill_summation = 0
     for i in take:
         bill_summation += int(i.bill)
     return bill_summation
 
+#for some perticuler users, this are not counted as view
 def total_problem():
     total_feedback = len(Feedback.objects.all())
     total_pr = len(ReportProblem.objects.all())
     total = total_feedback + total_pr
     return total
 
+#for some perticuler users, this are not counted as view
 def total_released_patient():
     patient = len(Patient.objects.filter(released=True))
     return patient
 
+# for admin panel control, to see the list of patient
 def patient(request):
     if not request.user.is_authenticated:
         return redirect('/login')
@@ -99,6 +106,7 @@ def patient(request):
     else:
         return redirect('/')
 
+# for admin panel control, to edit the patient information
 def edit_patient(request, id):
     if not request.user.is_authenticated:
         return redirect('/login')
@@ -131,7 +139,7 @@ def edit_patient(request, id):
     else:
         return redirect('/')
 
-
+# for admin panel control, to delete the patient information
 def delete_patient(request, id):
     if not request.user.is_authenticated:
         return redirect('/login')
@@ -148,6 +156,7 @@ def delete_patient(request, id):
     else:
         return redirect('/')
 
+# crud system for doctor, add and show, for only admin
 def crudDoctor(request):
     if request.user.is_authenticated and request.user.is_superuser:
         doctor = Doctor.objects.all()
@@ -178,6 +187,7 @@ def crudDoctor(request):
     else:
         return redirect('/')
 
+# edit view of doctor, for only admin
 def edit_doctor(request, id):
     if request.user.is_authenticated and request.user.is_superuser:
         doc = Doctor.objects.filter(pk=id)
@@ -197,6 +207,7 @@ def edit_doctor(request, id):
     else:
         return redirect('/')
 
+# delete view of doctor, for only admin
 def delete_doctor(request, id):
     if request.user.is_authenticated and request.user.is_superuser:
         doc = Doctor.objects.filter(pk=id)
@@ -211,6 +222,7 @@ def delete_doctor(request, id):
     else:
         return redirect('/')
 
+# crud system for nurse, only accessible by admin
 def crudNurse(request):
     if request.user.is_authenticated and request.user.is_superuser:
         nurse = Nurse.objects.all()
@@ -240,6 +252,7 @@ def crudNurse(request):
     else:
         return redirect('/')
 
+# edit view of nurse, only accessible for admin
 def edit_nurse(request, id):
     if request.user.is_authenticated and request.user.is_superuser:
         nur = Nurse.objects.filter(pk=id)
@@ -259,6 +272,7 @@ def edit_nurse(request, id):
     else:
         return redirect('/')
 
+# delete view of nurse, only accessible for admin
 def delete_nurse(request, id):
     if request.user.is_authenticated and request.user.is_superuser:
         nur = Nurse.objects.filter(pk=id)
@@ -273,6 +287,7 @@ def delete_nurse(request, id):
     else:
         return redirect('/')
 
+# crud system of assistant, only accessible for admin
 def crudAssistant(request):
     if request.user.is_authenticated and request.user.is_superuser:
         assis = Assistant.objects.all()
@@ -301,6 +316,7 @@ def crudAssistant(request):
     else:
         return redirect('/')
 
+# edit view of assistant, only accessible for admin
 def edit_assistant(request, id):
     if request.user.is_authenticated and request.user.is_superuser:
         assis = Assistant.objects.filter(pk=id)
@@ -319,6 +335,7 @@ def edit_assistant(request, id):
     else:
         return redirect('/')
 
+# delete view of assistant, only accessible for admin
 def delete_assistant(request, id):
     if request.user.is_authenticated and request.user.is_superuser:
         assis = Assistant.objects.filter(pk=id)
@@ -332,8 +349,8 @@ def delete_assistant(request, id):
         return render(request, 'front/delete_assistant_view.html', {"title":"Assistant Update","assis":assis})
     else:
         return redirect('/')
-
 # crud operations are successfully done
+# for admin panel control set bill, this bill will go to patient
 def set_bill(request):
     if request.user.is_authenticated and request.user.is_superuser:
         patient = Patient.objects.all()
@@ -353,6 +370,7 @@ def set_bill(request):
     else:
         return redirect('/')
 
+# edit bill view only accessible for admin
 def edit_bill(request, id):
     if request.user.is_authenticated and request.user.is_superuser:
         bill = Bill.objects.filter(pk=id)
@@ -378,6 +396,7 @@ def edit_bill(request, id):
     else:
         return redirect('/')
 
+# delete view of bill, only accessible for admin
 def delete_bill(request, id):
     if request.user.is_authenticated and request.user.is_superuser:
         bill = Bill.objects.filter(pk=id)
@@ -390,6 +409,7 @@ def delete_bill(request, id):
     else:
         return redirect('/')
 
+# reports and feedback, only available for admin and doctor
 def report_feedback(request):
     if request.user.is_authenticated and request.user.is_superuser or request.user.is_doctor:
         feed = Feedback.objects.all()
@@ -399,6 +419,7 @@ def report_feedback(request):
     else:
         return redirect('/')
 
+# delete view of feedback, only available for admin and doctor
 def delete_feedback(request, id):
     if request.user.is_authenticated and request.user.is_superuser or request.user.is_doctor:
         feed = Feedback.objects.filter(pk=id)
@@ -411,6 +432,7 @@ def delete_feedback(request, id):
     else:
         return redirect('/')
 
+# delete view of report, only available for admin
 def delete_report(request, id):
     if request.user.is_authenticated and request.user.is_superuser or request.user.is_doctor:
         report = ReportProblem.objects.filter(pk=id)
@@ -423,6 +445,7 @@ def delete_report(request, id):
     else:
         return redirect('/')
 
+# information of assigned doctor and assistants, only available for admin
 def control_info(request):
     if request.user.is_authenticated and request.user.is_superuser:
         doc = Doctor.objects.all()
@@ -456,7 +479,7 @@ def control_info(request):
     else:
         return redirect('/')
 
-
+# delete view of assigned doctor, only available for admin
 def delete_assigned_doctor(request, id):
     if request.user.is_authenticated and request.user.is_superuser:
         assign_doctor = assignedDoctor.objects.filter(pk=id)
@@ -469,7 +492,7 @@ def delete_assigned_doctor(request, id):
     else:
         return redirect('/')
 
-
+# delete view of assigned assistant, only available for admin
 def delete_assigned_assistant(request, id):
     if request.user.is_authenticated and request.user.is_superuser:
         assign_assistant = assignAssistant.objects.filter(pk=id)
@@ -482,7 +505,35 @@ def delete_assigned_assistant(request, id):
     else:
         return redirect('/')
 
+# medicine company view, only available for assistants
+def medicine_company_add(request):
+    if request.user.is_authenticated and request.user.is_assistant:
+        cmp = MedicineCompany.objects.all()
+        if request.method == 'POST':
+            mcpy = MedicineCompany(
+                company_name = request.POST.get('companyName')
+            )
+            mcpy.save()
+            return redirect('/company')
+        return render(request, 'front/add_medicine_company.html',{"title":"Add Medicine Companies","cmp":cmp})
+    else:
+        return redirect('/')
 
+# edit medicine company view, only available for assistant
+def edit_medicine_company(request,id):
+    if request.user.is_authenticated and request.user.is_assistant:
+        cmp = MedicineCompany.objects.filter(pk=id)
+        return HttpResponse("hello {}".format(id))
+    else:
+        return redirect('/')
+
+# delete medicine company view, only available for assistant
+def delete_medicine_company(request, id):
+    if request.user.is_authenticated and request.user.is_assistant:
+        cmp = MedicineCompany.objects.filter(pk=id)
+        return HttpResponse("hello {}".format(id))
+    else:
+        return redirect('/')
 
 def give_prescription(request):
     if request.user.is_authenticated and request.user.is_doctor:
