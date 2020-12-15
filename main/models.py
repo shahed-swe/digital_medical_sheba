@@ -93,6 +93,7 @@ class Medicine(models.Model):
 class Feedback(models.Model):
     patient = models.OneToOneField(Patient, on_delete=models.CASCADE, primary_key=True)
     feedback = models.CharField(max_length=120, blank=True, null=True)
+    solve = models.BooleanField(default=False)
 
     class Meta:
         db_table = "feedback_section"
@@ -115,6 +116,7 @@ class Bill(models.Model):
 class ReportProblem(models.Model):
     patient = models.OneToOneField(Patient, on_delete=models.CASCADE, primary_key=True)
     problem = models.CharField(max_length=300, blank=True, null=True)
+    solve = models.BooleanField(default=False)
 
     class Meta:
         db_table = "problem_reports"

@@ -8,6 +8,10 @@
     .another {
         margin-bottom: 500px;
     }
+    
+    a.take {
+        text-decoration: none;
+    }
 </style>
 <div class="row">
     <div class="col-md-12">
@@ -37,6 +41,7 @@
                                     <th class="text-center"><i class="gi gi-user"></i></th>
                                     <th>User's Full Name</th>
                                     <th>Feedback</th>
+                                    <th>Status</th>
                                     <th class="text-center">Actions</th>
                                 </tr>
                             </thead>
@@ -47,6 +52,11 @@
                                     <td class="text-center"><img src="{%static 'front/'%}img/placeholders/avatars/avatar15.jpg" alt="avatar" class="img-circle"></td>
                                     <td><a href="javascript:void(0)">{{i.patient.full_name | title}}</a></td>
                                     <td><span class="text-center">{{i.feedback}}</span></td>
+                                    {%if i.solve == True%}
+                                    <td><a href="{% url 'update_feedback_status' id=i.pk %}" class="take"><span class="text-center label label-success">Solved</span></a></td>
+                                    {%elif i.solve == False%}
+                                    <td><a href="{% url 'update_feedback_status' id=i.pk %}" class="take"><span class="text-center label label-danger">Not Solved</span></a></td>
+                                    {%endif%}
                                     <td class="text-center">
                                         <div class="btn-group">
                                             <a href="{% url 'delete_feedback' id=i.pk %}" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
@@ -71,6 +81,7 @@
                                     <th class="text-center"><i class="gi gi-user"></i></th>
                                     <th>User's Full Name</th>
                                     <th>Report</th>
+                                    <th>Status</th>
                                     <th class="text-center">Actions</th>
                                 </tr>
                             </thead>
@@ -81,6 +92,12 @@
                                     <td class="text-center"><img src="{%static 'front/'%}img/placeholders/avatars/avatar15.jpg" alt="avatar" class="img-circle"></td>
                                     <td><a href="javascript:void(0)">{{i.patient.full_name | title}}</a></td>
                                     <td><span class="text-center">{{i.problem}}</span></td>
+                                    <!--  -->
+                                    {%if i.solve == True%}
+                                    <td><a href="{% url 'update_report_status' id=i.pk %}" class="take"><span class="text-center label label-success">Solved</span></a></td>
+                                    {%else%}
+                                    <td><a href="{% url 'update_report_status' id=i.pk %}" class="take"><span class="text-center label label-danger">Not Solved</span></a></td>
+                                    {%endif%}
                                     <td class="text-center">
                                         <div class="btn-group">
                                             <a href="{% url 'delete_report' id=i.pk %}" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>

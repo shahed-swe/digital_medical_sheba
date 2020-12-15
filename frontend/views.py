@@ -414,10 +414,27 @@ def report_feedback(request):
     if request.user.is_authenticated and request.user.is_superuser or request.user.is_doctor:
         feed = Feedback.objects.all()
         report = ReportProblem.objects.all()
-        context = {"feed":feed, "report":report}
+        context = {"feed":feed, "report":report,"title":"Report & Feedback"}
         return render(request, 'front/reports.html',context)
     else:
         return redirect('/')
+
+# report status update only available for admin
+def update_report_status(request, id):
+    if request.user.is_authenticated:
+        rprt = ReportProblem.objects.filter(pk=id).update(solve=True)
+        return redirect('/reports_and_feedbacks')
+    else:
+        return redirect('/')
+
+# feedback status update only available for admin and doctor
+def update_feedback_status(request, id):
+    if request.user.is_authenticated or request.user.is_doctor:
+        fdb = Feedback.objects.filter(pk=id).update(solve=True)
+        return redirect('/reports_and_feedbacks')
+    else:
+        return redirect('/')
+
 
 # delete view of feedback, only available for admin and doctor
 def delete_feedback(request, id):
