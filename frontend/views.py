@@ -614,6 +614,12 @@ def give_prescription(request):
     else:
         return redirect('/')
 
+def delete_prescribed_data(request,id):
+    if request.user.is_authenticated and request.user.is_doctor:
+        return HttpResponse("Hello {}".format(id))
+    else:
+        return redirect('/')
+
 def patient_health(request):
     if request.user.is_authenticated and request.user.is_doctor:
         return HttpResponse("Hello")
