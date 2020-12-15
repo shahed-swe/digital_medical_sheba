@@ -5,6 +5,7 @@ from rest_framework.authtoken.models import Token
 import requests
 from . import forms
 from django.http import HttpResponse
+import datetime
 # Create your views here.
 # for admin panel
 def home(request):
@@ -593,7 +594,23 @@ def delete_medicine(request, id):
 
 def give_prescription(request):
     if request.user.is_authenticated and request.user.is_doctor:
-        return HttpResponse("Hello")
+        pat = Patient.objects.all()
+        med = Medicine.objects.all()
+        assign = assignMedicineNew.objects.all()
+        context = {"title":"Give Prescription","patient":pat,"medicine":med,'assignedMedicine':assign}
+        if request.method == "POST":
+            medic = request.POST.getlist('medicine')
+            medic = [int(i) for i in medic if i != None]
+            h,m,s = map(int, request.POST.get('time').split(":"))
+            assin = assignMedicineNew(
+                patient = Patient.objects.get(pk=request.POST.get('patient')),
+                medicine_time = datetime.time(h,m,s)
+            )
+            assin.save()
+            for i in medic:
+                assin.medicine.add(i)
+            return redirect('/give_prescription')
+        return render(request, 'front/give_prescription.html',context)
     else:
         return redirect('/')
 
