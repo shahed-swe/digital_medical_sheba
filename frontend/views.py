@@ -592,6 +592,7 @@ def delete_medicine(request, id):
     else:
         return redirect('/')
 
+# prescription giving only for doctor
 def give_prescription(request):
     if request.user.is_authenticated and request.user.is_doctor:
         pat = Patient.objects.all()
@@ -614,9 +615,16 @@ def give_prescription(request):
     else:
         return redirect('/')
 
+
+# delete prescription view only for doctor
 def delete_prescribed_data(request,id):
     if request.user.is_authenticated and request.user.is_doctor:
-        return HttpResponse("Hello {}".format(id))
+        assin = assignMedicineNew.objects.filter(pk=id)
+        if request.method == 'POST':
+            val = request.POST.get('button-value')
+            assin.delete()
+            return redirect('/give_presciption')
+        return render(request, 'front/delete_prescription.html')
     else:
         return redirect('/')
 
