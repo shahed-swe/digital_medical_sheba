@@ -41,7 +41,7 @@ class medicineCompanyViewSet(viewsets.ModelViewSet):
     permission_class = (IsAuthenticated,)
 
 class AssignMedicineViewSet(viewsets.ModelViewSet):
-    queryset = models.assignMedicine.objects.all()
+    queryset = models.assignMedicineNew.objects.all()
     serializer_class = serializers.assignMedicineSerializer
     authentication_class = (TokenAuthentication,)
     permission_class = (IsAuthenticated,)

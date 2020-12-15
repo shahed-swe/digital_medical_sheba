@@ -191,7 +191,7 @@ class assignMedicineSerializer(serializers.ModelSerializer):
     patient = patientSerializer(many=False)
     medicine = medicineSerializer(many=True)
     class Meta:
-        model = assignMedicine
+        model = assignMedicineNew
         fields = '__all__'
 
 class assignNurseSerializer(serializers.ModelSerializer):

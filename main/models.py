@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 # Create your models here.
+import datetime
 
 class User(AbstractUser):
     is_patient = models.BooleanField(default=False)
@@ -132,9 +133,11 @@ class assignNurse(models.Model):
     def __str__(self):
         return "Nurse Assigned For "+self.patient.full_name+" | "+str(self.pk)
 
-class assignMedicine(models.Model):
-    patient = models.OneToOneField(Patient, on_delete=models.CASCADE, primary_key=True,related_name="patient_medicine")
+class assignMedicineNew(models.Model):
+    id = models.AutoField(primary_key=True)
+    patient = models.ForeignKey(Patient,on_delete=models.CASCADE,blank=True,null=True, related_name="patient_medicine")
     medicine = models.ManyToManyField(Medicine, related_name="assign_medicine")
+    medicine_time = models.TimeField(default=datetime.time(12,00))
     notification = models.BooleanField(default=False)
 
     class Meta:
