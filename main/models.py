@@ -168,12 +168,13 @@ class assignedDoctor(models.Model):
     def __str__(self):
         return self.patient.user.first_name + ' | '+self.doctor.user.first_name + ' | '+str(self.pk)
 
-class PatientHealth(models.Model):
-    patient = models.OneToOneField(Patient, on_delete=models.CASCADE, primary_key=True)
+class PatientHealthAdd(models.Model):
+    id = models.AutoField(primary_key=True)
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, blank=True, null=True)
     health_report = models.CharField(max_length=500, blank=True, null=True)
 
     class Meta:
-        db_table = "patient_health"
+        db_table = "patient_health_add"
     
     def __str__(self):
         return self.patient.full_name+' | '+str(self.pk)

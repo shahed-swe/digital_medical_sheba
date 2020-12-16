@@ -31,6 +31,7 @@ urlpatterns = [
     path('give_prescription/', views.give_prescription,name="give_prescription"),
     url(r'^delete_prescription/(?P<id>.*)/$', views.delete_prescribed_data, name="delete_prescribed_data"),
     path('patient_health/', views.patient_health, name="patient_health"),
+    url(r'^delete_patient_health/(?P<id>.*)/$',views.delete_patient_health, name="delete_patient_health"),
     path('assign_nurse/',views.assign_nurse, name="assign_nurse"),
     path('give_report/',views.give_report, name="give_report"),
     path('control_info/',views.control_info, name="control_info"),

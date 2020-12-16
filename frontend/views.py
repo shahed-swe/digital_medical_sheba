@@ -624,13 +624,26 @@ def delete_prescribed_data(request,id):
             val = request.POST.get('button-value')
             assin.delete()
             return redirect('/give_presciption')
-        return render(request, 'front/delete_prescription.html')
+        return render(request, 'front/delete_prescription.html',{"title":"Delete Prescription"})
     else:
         return redirect('/')
 
 def patient_health(request):
     if request.user.is_authenticated and request.user.is_doctor:
-        return HttpResponse("Hello")
+        health = PatientHealthAdd.objects.all()
+        context = {"title":"Health",'health':health}
+        return render(request, 'front/patient_health_check.html', context)
+    else:
+        return redirect('/')
+
+def delete_patient_health(request, id):
+    if request.user.is_authenticated and request.user.is_doctor:
+        health = PatientHealthAdd.objects.filter(pk=id)
+        if request.method == 'POST':
+            val = request.POST.get('button-value')
+            health.delete()
+            return redirect('/patient_health')
+        return render(request, 'front/delete_patient_health.html',{'title':'Delete Patient Health'})
     else:
         return redirect('/')
 
