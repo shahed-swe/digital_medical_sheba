@@ -4,25 +4,30 @@
 <!-- static file loaded -->
 {%block main_content%}
 <!-- main content block starts -->
+<style>
+    a {
+        text-decoration: none !important;
+    }
+</style>
 <div id="page-content">
     <!-- Datatables Header -->
     <div class="content-header">
         <div class="header-section">
             <h1>
-                <i class="fa fa-table"></i>Patient Health<br><small>In nothing do men more nearly approach the gods than in giving health to men.</small><br/><small>– Marcus Tullius Cicero</small>
+                <i class="fa fa-table"></i><strong>Patient</strong> Bill<br><small>“Before you speak, listen. Before you write, think. Before you spend, earn. Before you invest, investigate. Before you criticize, wait. Before you pray, forgive. Before you quit, try. Before you retire, save. Before you die, give.”</small><br/><small>– William A. Ward</small>
             </h1>
         </div>
     </div>
     <ul class="breadcrumb breadcrumb-top">
         <li>Tables</li>
-        <li><a href="">Health</a></li>
+        <li><a href="">Bill</a></li>
     </ul>
     <!-- END Datatables Header -->
 
     <!-- Datatables Content -->
     <div class="block full">
         <div class="block-title">
-            <h2><strong>Health</strong> Condition</h2>
+            <h2><strong>Patient</strong> Bill</h2>
         </div>
         <div class="table-responsive">
             <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
@@ -30,21 +35,27 @@
                     <tr>
                         <th class="text-center">ID</th>
                         <th class="text-center"><i class="gi gi-user"></i></th>
-                        <th>Patient</th>
-                        <th>Condition</th>
-                        <th class="text-center">Actions</th>
+                        <th>Full Name</th>
+                        <th>Amount</th>
+                        <th>Paid/Not Paid</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {%for i in health%}
+                    {%for i in bill%}
                     <tr>
                         <td class="text-center">{{i.patient.user.id}}</td>
                         <td class="text-center"><img src="{%static 'front/'%}img/placeholders/avatars/avatar15.jpg" alt="avatar" class="img-circle"></td>
                         <td><a href="javascript:void(0)">{{i.patient.full_name | title}}</a></td>
-                        <td><span class="text-center">{{i.health_report}}</span></td>
+                        <td>{{i.bill}}</td>
+                        {%if i.paid == True%}
+                        <td><a href="{% url 'get_bill' id=i.pk %}"><span class="text-center label label-success">Paid</span></a></td>
+                        {%else%}
+                        <td><a href="{% url 'get_bill' id=i.pk %}"><span class="text-center label label-warning">Not Paid</span></a></td>
+                        {%endif%}
                         <td class="text-center">
                             <div class="btn-group">
-                                <a href="{% url 'delete_patient_health' id=i.pk %}" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
+                                <a href="{% url 'edit_bill' id=i.pk %}" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
+                                <a href="{% url 'delete_bill' id=i.pk %}" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>
                             </div>
                         </td>
                     </tr>

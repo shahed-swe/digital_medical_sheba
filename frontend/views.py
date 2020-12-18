@@ -36,6 +36,11 @@ def home(request):
     released = total_released_patient()
     doctors = len(Doctor.objects.all())
     assistant = len(Assistant.objects.all())
+    assignednurse = len(assignNurse.objects.all())
+    assigneddoctor = len(assignedDoctor.objects.all())
+    slv1 = len(Feedback.objects.filter(solve=False))
+    slv2 = len(ReportProblem.objects.filter(solve=False))
+    slv = slv1 + slv2
     context = {
         "total_user": total_user,
         "total_patient":total_patient,
@@ -46,6 +51,10 @@ def home(request):
         'total_released':released,
         'total_doctors':doctors,
         'total_assistant':assistant,
+        'assign_nurse':assignednurse,
+        'assign_doc':assigneddoctor,
+        'solve':slv,
+
         }
     return render(request, 'front/home_page.html' ,context)
 
@@ -592,6 +601,22 @@ def delete_medicine(request, id):
     else:
         return redirect('/')
 
+# get bill view, only available for assistant
+def get_bill_view(request):
+    if request.user.is_authenticated and request.user.is_assistant:
+        patient = Patient.objects.all()
+        bill = Bill.objects.all()
+        context = {"title": 'Get Bill','bill':bill, 'pat':patient}
+        return render(request, 'front/get_bill.html',context)
+    else:
+        return redirect('/')
+
+def get_bill(request, id):
+    if request.user.is_authenticated and request.user.is_assistant:
+        Bill.objects.filter(pk=id).update(paid=True)
+        return redirect('/get_bill')
+    else:
+        return redirect('/')
 # prescription giving only for doctor
 def give_prescription(request):
     if request.user.is_authenticated and request.user.is_doctor:
@@ -649,9 +674,32 @@ def delete_patient_health(request, id):
 
 def assign_nurse(request):
     if request.user.is_authenticated and request.user.is_doctor:
-        return HttpResponse("Hello")
+        pat = Patient.objects.all()
+        nrs = Nurse.objects.all()
+        assigned_nurse = assignNurse.objects.all()
+        context = {"title":"Assign Nurse",'patient':pat,'nurse':nrs,'assign_nurse':assigned_nurse}
+        if request.method == 'POST':
+            nurse = request.POST.getlist('nurse')
+            new_nurse = [int(i) for i in nurse if i != None]
+            assign_nurse = assignNurse(
+                patient=Patient.objects.get(pk=request.POST.get('patient'))
+            )
+            assign_nurse.save()
+            for i in new_nurse:
+                assign_nurse.nurse.add(i)
+            
+            return redirect('/assign_nurse')
+        return render(request, 'front/assign_nurse.html',context)
     else:
         return redirect('/')
+
+def delete_assigned_nurse(request,id):
+    if request.user.is_authenticated and request.user.is_doctor:
+        assignNurse.objects.filter(pk=id).delete()
+        return redirect('/assign_nurse')
+    else:
+        return redirect('/')
+
 
 def give_report(request):
     if request.user.is_authenticated and request.user.is_doctor:

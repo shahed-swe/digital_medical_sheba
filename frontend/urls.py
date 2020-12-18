@@ -33,6 +33,7 @@ urlpatterns = [
     path('patient_health/', views.patient_health, name="patient_health"),
     url(r'^delete_patient_health/(?P<id>.*)/$',views.delete_patient_health, name="delete_patient_health"),
     path('assign_nurse/',views.assign_nurse, name="assign_nurse"),
+    url(r'^delete_assigned_nurse/(?P<id>.*)/$',views.delete_assigned_nurse, name="delete_assigned_nurse"),
     path('give_report/',views.give_report, name="give_report"),
     path('control_info/',views.control_info, name="control_info"),
     url(r'^delete_assigned_doctor/(?P<id>.*)/$',views.delete_assigned_doctor, name="delete_assigned_doctor"),
@@ -42,4 +43,7 @@ urlpatterns = [
     url(r'^delete_medicine_company/(?P<id>.*)/$', views.delete_medicine_company, name="delete_medicine_company"),
     path('medicine/', views.add_medicine, name="add_medicine"),
     url(r'^delete_medicine/(?P<id>.*)/$', views.delete_medicine, name="delete_medicine"),
+    path('get_bill/', views.get_bill_view, name="get_bill_view"),
+    url(r'^update_bill_data/(?P<id>.*)/$', views.get_bill, name="get_bill"),
 ]
+

@@ -185,78 +185,33 @@
             {%endif%}
             <!-- END Widget -->
         </div>
-        <div class="col-sm-6">
-            <!-- Widget -->
-            <a href="page_comp_charts.html" class="widget widget-hover-effect1">
-                <div class="widget-simple">
-                    <div class="widget-icon pull-left themed-background animation-fadeIn">
-                        <i class="gi gi-wallet"></i>
-                    </div>
-                    <div class="pull-right">
-                        <span id="mini-chart-sales"></span>
-                    </div>
-                    <h3 class="widget-content animation-pullDown visible-lg">
-                        Latest <strong>Sales</strong>
-                        <small>Per hour</small>
-                    </h3>
-                </div>
-            </a>
-            <!-- END Widget -->
-        </div>
-        <div class="col-sm-6">
-            <!-- Widget -->
-            <a href="page_widgets_stats.html" class="widget widget-hover-effect1">
-                <div class="widget-simple">
-                    <div class="widget-icon pull-left themed-background animation-fadeIn">
-                        <i class="gi gi-crown"></i>
-                    </div>
-                    <div class="pull-right">
-                        <!-- Jquery Sparkline (initialized in js/pages/index.js), for more examples you can check out http://omnipotent.net/jquery.sparkline/#s-about -->
-                        <span id="mini-chart-brand"></span>
-                    </div>
-                    <h3 class="widget-content animation-pullDown visible-lg">
-                        Our <strong>Brand</strong>
-                        <small>Popularity over time</small>
-                    </h3>
-                </div>
-            </a>
-            <!-- END Widget -->
-        </div>
     </div>
     <!-- END Mini Top Stats Row -->
 
     <!-- Widgets Row -->
     <div class="row text-center">
         <div class="col-sm-6 col-lg-3">
-            <a href="javascript:void(0)" class="widget widget-hover-effect2">
+            <a href="/reports_and_feedbacks" class="widget widget-hover-effect1effect2">
                 <div class="widget-extra themed-background">
-                    <h4 class="widget-content-light"><strong>Pending</strong> Orders</h4>
+                    <h4 class="widget-content-light"><strong>Pending</strong> Reports</h4>
                 </div>
-                <div class="widget-extra-full"><span class="h2 animation-expandOpen">3</span></div>
+                <div class="widget-extra-full"><span class="h2 animation-expandOpen">{{solve}}</span></div>
             </a>
         </div>
         <div class="col-sm-6 col-lg-3">
             <a href="javascript:void(0)" class="widget widget-hover-effect2">
                 <div class="widget-extra themed-background-dark">
-                    <h4 class="widget-content-light"><strong>Conversion</strong> Rate</h4>
+                    <h4 class="widget-content-light"><strong>Total</strong> Nurse Assigned</h4>
                 </div>
-                <div class="widget-extra-full"><span class="h2 themed-color-dark animation-expandOpen">4.7%</span></div>
+                <div class="widget-extra-full"><span class="h2 themed-color-dark animation-expandOpen">{{assign_nurse}}</span></div>
             </a>
         </div>
-        <div class="col-sm-6 col-lg-3">
+        <div class="col-sm-6 col-lg-6">
             <a href="javascript:void(0)" class="widget widget-hover-effect2">
                 <div class="widget-extra themed-background-dark">
-                    <h4 class="widget-content-light"><strong>Orders</strong> Today</h4>
+                    <h4 class="widget-content-light"><strong>Total</strong> Doctors Assigned</h4>
                 </div>
-                <div class="widget-extra-full"><span class="h2 themed-color-dark animation-expandOpen">120</span></div>
-            </a>
-        </div>
-        <div class="col-sm-6 col-lg-3">
-            <a href="javascript:void(0)" class="widget widget-hover-effect2">
-                <div class="widget-extra themed-background-dark">
-                    <h4 class="widget-content-light"><strong>Earnings</strong> Today</h4>
-                </div>
-                <div class="widget-extra-full"><span class="h2 themed-color-dark animation-expandOpen">$ 4.250</span></div>
+                <div class="widget-extra-full"><span class="h2 themed-color-dark animation-expandOpen">{{assign_doc}}</span></div>
             </a>
         </div>
     </div>
