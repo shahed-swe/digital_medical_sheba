@@ -44,7 +44,7 @@
     <div id="login-container" class="animation-fadeIn">
         <!-- Login Title -->
         <div class="login-title text-center">
-            <h1><i class="gi gi-send"></i> <strong>Admin</strong><br></h1>
+            <h1><i class="gi gi-send"></i> <strong>Login</strong><br></h1>
         </div>
         <!-- END Login Title -->
 
@@ -81,13 +81,14 @@
                     </div>
                 </div>
             </form>
+            <span class="help-block text-center"><span style="color:red">Want to register as Patient? Goto:  <a href="{% url 'registration'%}">Register</a> </span>
             <!-- END Login Form -->
         </div>
         <!-- END Login Block -->
 
         <!-- Footer -->
         <footer class="text-muted text-center">
-            <small><span><script>document.write(new Date().getFullYear())</script></span> &copy; <a href="https://github.com/shahed-swe" target="_blank">Login Panel</a></small>
+            <small><span><script>document.write(new Date().getFullYear())</script></span> &copy; <a href="/login" target="_blank">Login Panel</a></small>
         </footer>
         <!-- END Footer -->
     </div>

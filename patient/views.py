@@ -19,6 +19,8 @@ def patient(request):
 
 
 def registration(request):
+    if request.user.is_authenticated:
+        return redirect('/patient/home')
     if request.method == "POST":
         password1 = request.POST.get('password1')
         password2 = request.POST.get('password2')
