@@ -1,0 +1,114 @@
+{%extends 'front/base.html'%}
+<!--  -->
+{%load static%}
+<!-- static file loaded -->
+{%block main_content%}
+<!-- main content block starts -->
+<div id="page-content">
+    <!-- Datatables Header -->
+    <div class="content-header">
+        <div class="header-section">
+            <h1>
+                <i class="fa fa-table"></i>Patient<br><small>In nothing do men more nearly approach the gods than in giving health to men.</small><br/><small>– Marcus Tullius Cicero</small>
+            </h1>
+        </div>
+    </div>
+    <ul class="breadcrumb breadcrumb-top">
+        <li>Tables</li>
+        <li><a href="">Patient</a></li>
+    </ul>
+    <!-- END Datatables Header -->
+
+    <!-- Datatables Content -->
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Basic Form Elements Block -->
+            <div class="block">
+                <!-- Basic Form Elements Title -->
+                <div class="block-title">
+                    <div class="block-options pull-right">
+                        <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default toggle-bordered enable-tooltip" data-toggle="button" title="" data-original-title="Toggles .form-bordered class">No Borders</a>
+                    </div>
+                    <h2><strong>Patient Report</strong> Create</h2>
+                </div>
+                <!-- END Form Elements Title -->
+
+                <!-- Basic Form Elements Content -->
+                <form method="POST" class="form-horizontal form-bordered">
+                    {%csrf_token%}
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Patient</label>
+                        <div class="col-md-9">
+                            <select name="patient" id="patient" class="form-control">
+                                <option value="">Choose...</option>
+                                {%for i in pat%}
+                                <option value="{{i.pk}}">{{i.full_name}}</option>
+                                {%endfor%}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" for="example-email-input">Phone No</label>
+                        <div class="col-md-9">
+                            <textarea name="report_new" id="" cols="30" rows="10" class="form-control" placeholder="Report"></textarea>
+                            <span class="help-block"><span style="color:red">*</span>please enter report of patient</span>
+                        </div>
+                    </div>
+                    <div class="form-group form-actions">
+                        <div class="col-md-9 col-md-offset-3">
+                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Submit</button>
+                        </div>
+                    </div>
+                </form>
+                <!-- END Basic Form Elements Content -->
+            </div>
+            <!-- END Basic Form Elements Block -->
+        </div>
+    </div>
+    <div class="block full">
+        <div class="block-title">
+            <h2><strong>Reports</strong></h2>
+        </div>
+        <div class="table-responsive">
+            <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                <thead>
+                    <tr>
+                        <th class="text-center">ID</th>
+                        <th class="text-center"><i class="gi gi-user"></i></th>
+                        <th>Patient</th>
+                        <th>Report</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for i in report%}
+                    <tr>
+                        <td class="text-center">{{i.id}}</td>
+                        <td class="text-center"><img src="{%static 'front/'%}img/placeholders/avatars/avatar15.jpg" alt="avatar" class="img-circle"></td>
+                        <td><a href="javascript:void(0)">{{i.patient.full_name | title}}</a></td>
+                        <td>{{i.health_report}}</td>
+                        <td class="text-center">
+                            <div class="btn-group">
+                                <a href="{% url 'delete_patient_report' id=i.pk %}" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger" onclick="window.confirm('Are you sure want to delete this report?')"><i class="fa fa-times"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- END Datatables Content -->
+</div>
+{%endblock main_content%}
+<!--  -->
+{%block main_script%}
+<!-- scripts start -->
+<script src="{%static 'front/'%}js/pages/tablesDatatables.js"></script>
+<script>
+    $(function() {
+        TablesDatatables.init();
+    });
+</script>
+<!-- scripts ends -->
+{%endblock main_script%}

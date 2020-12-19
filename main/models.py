@@ -179,3 +179,15 @@ class PatientHealthAdd(models.Model):
     def __str__(self):
         return self.patient.full_name+' | '+str(self.pk)
 
+
+class PatientHealthReport(models.Model):
+    id = models.AutoField(primary_key=True)
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, blank=True, null=True)
+    health_report = models.CharField(max_length=500, blank=True, null=True)
+
+    class Meta:
+        db_table = "patient_health_report"
+    
+    def __str__(self):
+        return self.patient.full_name+' | '+str(self.pk)
+

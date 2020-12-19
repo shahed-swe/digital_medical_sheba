@@ -703,6 +703,26 @@ def delete_assigned_nurse(request,id):
 
 def give_report(request):
     if request.user.is_authenticated and request.user.is_doctor:
-        return HttpResponse("Hello")
+        pat = Patient.objects.all()
+        health_report = PatientHealthReport.objects.all()
+        context = {"title":"Patient report","pat":pat,"report":health_report}
+        if request.method == "POST":
+            new_rpeort = PatientHealthReport(
+                patient = Patient.objects.get(pk=request.POST.get('patient')),
+                health_report = request.POST.get('report_new')
+            )
+            new_rpeort.save()
+            return redirect('/give_report')
+        return render(request, 'front/patient_report_giving.html',context)
     else:
         return redirect('/')
+
+
+def delete_patient_report(request, id):
+    if request.user.is_authenticated and request.user.is_doctor:
+        PatientHealthReport.objects.filter(pk=id).delete()
+        return redirect('/give_report')
+    else:
+        return redirect('/')
+
+
