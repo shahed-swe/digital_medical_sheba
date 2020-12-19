@@ -48,7 +48,7 @@ urlpatterns = [
     url(r'^update_bill_data/(?P<id>.*)/$', views.get_bill, name="get_bill"),
     path('patient_medicine_info/', views.patient_medicine_info, name="patient_medicine_info"),
     url(r'^patient_profile/(?P<id>.*)/$', views.patient_profile, name="patient_profile"),
-    path('give_patient_report',views.give_patient_report, name="give_patient_report"),
+    path('give_patient_report/',views.give_patient_report, name="give_patient_report"),
     
 ]
 
