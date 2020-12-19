@@ -1,0 +1,74 @@
+{%extends 'front/base.html'%}
+<!-- extended -->
+{%load static%}
+<!-- static file loaded -->
+{%block main_content%}
+<!-- start -->
+<div id="page-content" style="min-height: 1189px;">
+    <!-- Customer Content -->
+    <div class="row">
+        <div class="col-lg-12">
+            <!-- Customer Info Block -->
+            <div class="block">
+                <!-- Customer Info Title -->
+                <div class="block-title">
+                    <h2><i class="fa fa-file-o"></i> <strong>Patient</strong> Profile</h2>
+                </div>
+                <!-- END Customer Info Title -->
+                {%for i in patient%}
+                <!-- Customer Info -->
+                <div class="block-section text-center">
+                    <a href="javascript:void(0)">
+                        <img src="{%static 'front/'%}img/placeholders/avatars/avatar4@2x.jpg" alt="avatar" class="img-circle">
+                    </a>
+                    <h3>
+                        <strong>{{i.user.first_name | title}} {{i.user.last_name | title}}</strong><br><small></small>
+                    </h3>
+                </div>
+                <table class="table table-borderless table-striped table-vcenter">
+                    <tbody>
+                        <tr>
+                            <td class="text-right" style="width: 50%;"><strong>Social Title</strong></td>
+                            <td>Mr. {{i.user.first_name}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-right"><strong>Email</strong></td>
+                            <td>{{i.user.email}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-right"><strong>Admitted To Hospital</strong></td>
+                            <td>{{i.user.date_joined}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-right"><strong>Language</strong></td>
+                            <td>English (UK)</td>
+                        </tr>
+                        <tr>
+                            <td class="text-right"><strong>Registrations</strong></td>
+                            <td><span class="label label-primary">Patient</span></td>
+                        </tr>
+                        <tr>
+                            <td class="text-right"><strong>Status</strong></td>
+                            {%if user.is_active%}
+                            <td><span class="label label-success"><i class="fa fa-check"></i> Active</span></td>
+                            {%else%}
+                            <td><span class="label label-danger"><i class="fa fa-check"></i>Not Active</span></td>
+                            {%endif%}
+                        </tr>
+                    </tbody>
+                </table>
+                {%endfor%}
+                <!-- END Customer Info -->
+            </div>
+            <!-- END Customer Info Block -->
+        </div>
+    </div>
+    <!-- END Customer Content -->
+</div>
+<!-- end -->
+{%endblock main_content%}
+<!--  -->
+{%block main_script%}
+<!-- start -->
+<!-- end -->
+{%endblock main_script%}

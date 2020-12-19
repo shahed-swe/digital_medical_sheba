@@ -12,11 +12,10 @@ def home(request):
     if not request.user.is_authenticated:
         return redirect('/login')
     elif request.user.is_patient:
-        return redirect('patient/')
+        return redirect('/patient/home')
     total_user = len(User.objects.all())
     total_patient = len(Patient.objects.all())
     total_medicine = len(Medicine.objects.all())
-
     # url = "https://api.openweathermap.org/data/2.5/weather?q={}&appid={}"
     # api_key = "ec47c902d7798b639246714c56a0d4ef"
     # city = 'Tangail'
@@ -653,6 +652,7 @@ def delete_prescribed_data(request,id):
     else:
         return redirect('/')
 
+# only available for doctor
 def patient_health(request):
     if request.user.is_authenticated and request.user.is_doctor:
         health = PatientHealthAdd.objects.all()
@@ -661,6 +661,7 @@ def patient_health(request):
     else:
         return redirect('/')
 
+# only available for doctor 
 def delete_patient_health(request, id):
     if request.user.is_authenticated and request.user.is_doctor:
         health = PatientHealthAdd.objects.filter(pk=id)
@@ -672,6 +673,7 @@ def delete_patient_health(request, id):
     else:
         return redirect('/')
 
+# only available for doctor
 def assign_nurse(request):
     if request.user.is_authenticated and request.user.is_doctor:
         pat = Patient.objects.all()
@@ -693,6 +695,7 @@ def assign_nurse(request):
     else:
         return redirect('/')
 
+# only available for doctor
 def delete_assigned_nurse(request,id):
     if request.user.is_authenticated and request.user.is_doctor:
         assignNurse.objects.filter(pk=id).delete()
@@ -700,7 +703,7 @@ def delete_assigned_nurse(request,id):
     else:
         return redirect('/')
 
-
+# only available for doctor
 def give_report(request):
     if request.user.is_authenticated and request.user.is_doctor:
         pat = Patient.objects.all()
@@ -717,7 +720,7 @@ def give_report(request):
     else:
         return redirect('/')
 
-
+# only available for doctor
 def delete_patient_report(request, id):
     if request.user.is_authenticated and request.user.is_doctor:
         PatientHealthReport.objects.filter(pk=id).delete()
@@ -725,4 +728,37 @@ def delete_patient_report(request, id):
     else:
         return redirect('/')
 
+# patient medicine information which has been added to patient's profile. only available for nurse
+def patient_medicine_info(request):
+    if request.user.is_authenticated and request.user.is_nurse:
+        medicine_assigned = assignMedicineNew.objects.all()
+        context = {"title":"Patient Information","profiler":medicine_assigned}
+        return render(request, 'front/get_patient_information.html',context)
+    else:
+        return redirect('/')
 
+
+# patient profile check
+def patient_profile(request, id):
+    if request.user.is_authenticated and request.user.is_nurse:
+        pat = Patient.objects.filter(pk=id)
+        context = {"title":"Patient Profile",'patient':pat}
+        return render(request, 'front/patient_profile.html',context)
+    else:
+        return redirect('/')
+
+# report patient health only available for nurse
+def give_patient_report(request):
+    if request.user.is_authenticated and request.user.is_nurse:
+        pat = Patient.objects.all()
+        context = {"title":"Give Report",'pat':pat}
+        if request.method == "POST":
+            pat_report_add = PatientHealthAdd(
+                patient = Patient.objects.get(pk=request.POST.get('patient')),
+                health_report=request.POST.get('situation')
+            )
+            pat_report_add.save()
+            return redirect('/give_patient_report')
+        return render(request, 'front/give_patient_report.html', context)
+    else:
+        return redirect('/')

@@ -168,6 +168,7 @@ class assignedDoctor(models.Model):
     def __str__(self):
         return self.patient.user.first_name + ' | '+self.doctor.user.first_name + ' | '+str(self.pk)
 
+# this one is for nurse only to add not edit or delete, doctor will be able to delete
 class PatientHealthAdd(models.Model):
     id = models.AutoField(primary_key=True)
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE, blank=True, null=True)
@@ -179,7 +180,7 @@ class PatientHealthAdd(models.Model):
     def __str__(self):
         return self.patient.full_name+' | '+str(self.pk)
 
-
+# this one is for doctor only to add and delete
 class PatientHealthReport(models.Model):
     id = models.AutoField(primary_key=True)
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE, blank=True, null=True)

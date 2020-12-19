@@ -11,10 +11,11 @@ def patient(request):
     elif request.user.is_authenticated and request.user.is_doctor:
         return redirect('/')
     elif request.user.is_authenticated and request.user.is_nurse:
-        return redirect('nurse/')
+        return redirect('/')
     elif request.user.is_authenticated and request.user.is_assistant:
-        return redirect('nurse/')
-    return render(request, 'patient.html', {"title":"Patient | Home"})
+        return redirect('/')
+    else:
+        return render(request, 'home.html', {"title":"Patient | Home"})
 
 
 def registration(request):

@@ -46,5 +46,9 @@ urlpatterns = [
     url(r'^delete_medicine/(?P<id>.*)/$', views.delete_medicine, name="delete_medicine"),
     path('get_bill/', views.get_bill_view, name="get_bill_view"),
     url(r'^update_bill_data/(?P<id>.*)/$', views.get_bill, name="get_bill"),
+    path('patient_medicine_info/', views.patient_medicine_info, name="patient_medicine_info"),
+    url(r'^patient_profile/(?P<id>.*)/$', views.patient_profile, name="patient_profile"),
+    path('give_patient_report',views.give_patient_report, name="give_patient_report"),
+    
 ]
 
