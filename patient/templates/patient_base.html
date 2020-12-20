@@ -61,7 +61,7 @@
         <ul>
             {%if user.is_authenticated%}
             <!--  -->
-            <li><a href="#contact.html">Profile | {{user.first_name}}</a></li>
+            <li><a href="{%url 'profile'%}">Profile | {{user.first_name}}</a></li>
             <li><a href="#about.html">Medicines</a></li>
             <li><a href="#services.html">Feedback</a></li>
             <li><a href="#about.html">Report</a></li>

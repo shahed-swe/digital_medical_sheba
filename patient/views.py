@@ -50,3 +50,12 @@ def registration(request):
             context = {"title":"Registration","message":message}
             return render(request, 'registration.html',{'title':'Registration'})
     return render(request, 'registration.html',{"title":'Registration'})
+
+def profile(request):
+    if request.user.is_authenticated and request.user.is_patient:
+        pat = Patient.objects.filter(pk=request.user.pk)
+        print(pat[0].pk)
+        context = {"title":"Profile | {}".format(pat[0].full_name),'patient':pat}
+        return render(request, 'patient_profile.html',context)
+    else:
+        return redirect('/patient/home')
