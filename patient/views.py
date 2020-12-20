@@ -65,3 +65,10 @@ def profile(request):
         return render(request, 'patient_profile.html',context)
     else:
         return redirect('/patient/home')
+
+def medicine(request):
+    if request.user.is_authenticated and request.user.is_patient:
+        medicines = assignMedicineNew.objects.filter(patient=request.user.pk)
+        print(medicines)
+        context = {"title":"Medicines",'medicine':medicines}
+        return render(request, 'medicines.html',context)
