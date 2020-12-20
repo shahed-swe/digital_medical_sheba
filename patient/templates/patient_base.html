@@ -25,7 +25,7 @@
         
         .search-right a.topuser span.fa,
         a.hnysearch-icon span.fa {
-            background: #00ce7c;
+            background: #009c5e;
         }
         
         .search-right .popup form button {
@@ -39,6 +39,18 @@
         .cbp-spmenu a:hover {
             background: #00ce7c;
         }
+        
+        .w3l-newsletter button.btn {
+            background: #00ce7c;
+        }
+        
+        .w3l-testimonials span.fa {
+            background: #00ce7c;
+        }
+        
+        .w3l-main-slider .banner-info-bg h4.sub-font {
+            color: #00ce7c;
+        }
     </style>
 </head>
 
@@ -47,15 +59,14 @@
         <h3>Menu</h3>
 
         <ul>
-            <li><a class="active" href="{%url 'patient'%}">Home</a></li>
             {%if user.is_authenticated%}
             <!--  -->
-            <li><a href="#about.html">About Us</a></li>
-            <li><a href="#services.html">Services</a></li>
-            <li><a href="#about.html">Team</a></li>
-            <li><a href="#contact.html">Contact</a></li>
+            <li><a href="#contact.html">Profile | {{user.first_name}}</a></li>
+            <li><a href="#about.html">Medicines</a></li>
+            <li><a href="#services.html">Feedback</a></li>
+            <li><a href="#about.html">Report</a></li>
             {%else%}
-            <li><a href="/registration">Registration</a></li>
+            <li><a href="{%url 'registration'%}">Registration</a></li>
             <li><a href="{%url 'mylogin'%}">Login</a></li>
             {%endif%}
         </ul>
@@ -75,9 +86,11 @@
 							</a></h1>
                     </div>
                     <div class="icon-left search-right text-right">
-                        <a class="topuser" href="#"><span class="fa fa-user" aria-hidden="true"></span></a>
-                        <a href="#search" class="hnysearch-icon" title="search"><span class="fa fa-search"
-								aria-hidden="true"></span></a>
+                        {%if user.is_authenticated%}
+                        <a class="topuser" href="/logout">Logout</a>
+                        <!--  -->
+                        {%endif%}
+
                         <!-- search popup -->
                         <div id="search" class="pop-overlay">
                             <div class="popup">
@@ -104,86 +117,10 @@
         <section class="w3l-footer">
             <footer class="footer-28">
                 <div class="footer-bg-layer">
-                    <div class="container py-lg-3">
-                        <div class="row footer-top-28">
-                            <div class="col-lg-6 col-md-5 footer-list-28 mt-5">
-                                <h6 class="footer-title-28">Contact information</h6>
-                                <ul>
-                                    <li>
-                                        <p><strong>Address</strong> : #135 block, Barnard St. Brooklyn, NY 10036, USA
-                                        </p>
-                                    </li>
-                                    <li>
-                                        <p><strong>Phone</strong> : <a href="tel:+(12)234-11-24">+(12)234-11-24</a></p>
-                                    </li>
-                                    <li>
-                                        <p><strong>Email</strong> : <a href="mailto:example@mail.com">example@mail.com</a></p>
-                                    </li>
-                                </ul>
-
-                                <div class="main-social-footer-28 mt-3">
-                                    <ul class="social-icons">
-                                        <li class="facebook">
-                                            <a href="#link" title="Facebook">
-                                                <span class="fa fa-facebook" aria-hidden="true"></span>
-                                            </a>
-                                        </li>
-                                        <li class="twitter">
-                                            <a href="#link" title="Twitter">
-                                                <span class="fa fa-twitter" aria-hidden="true"></span>
-                                            </a>
-                                        </li>
-                                        <li class="dribbble">
-                                            <a href="#link" title="Dribbble">
-                                                <span class="fa fa-dribbble" aria-hidden="true"></span>
-                                            </a>
-                                        </li>
-                                        <li class="google">
-                                            <a href="#link" title="Google">
-                                                <span class="fa fa-google" aria-hidden="true"></span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-7">
-                                <div class="row">
-                                    <div class="col-sm-4 col-6 footer-list-28 mt-5">
-                                        <h6 class="footer-title-28">Company</h6>
-                                        <ul>
-                                            <li><a href="about.html">About Us</a></li>
-                                            <li><a href="#blogpost">Blog Posts</a></li>
-                                            <li><a href="services.html">Servies</a></li>
-                                            <li><a href="#pricing">Pricing</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-sm-4 col-6 footer-list-28 mt-5">
-                                        <h6 class="footer-title-28">Support</h6>
-                                        <ul>
-                                            <li><a href="#link">Documentation</a></li>
-                                            <li><a href="#link">Privacy policy</a></li>
-                                            <li><a href="#link">Terms of service</a></li>
-                                            <li><a href="#link">24/7 support</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-sm-4 footer-list-28 mt-5">
-                                        <h6 class="footer-title-28">Categories</h6>
-                                        <ul>
-                                            <li><a href="services.html">Plumbing</a></li>
-                                            <li><a href="services.html">Carpenter</a></li>
-                                            <li><a href="services.html">Electrician</a></li>
-                                            <li><a href="services.html">Wall painting</a></li>
-
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="midd-footer-28 align-center py-lg-4 py-3 mt-5">
                         <div class="container">
-                            <p class="copy-footer-28 text-center"> &copy; 2020 AbodeDesk. All Rights Reserved. Design by
-                                <a href="https://w3layouts.com/">W3Layouts</a></p>
+                            <p class="copy-footer-28 text-center"> &copy; . All Rights Reserved. Design by
+                                <a href="https://github.com/shahed-swe/">Shahed</a></p>
                         </div>
                     </div>
                 </div>
