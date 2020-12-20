@@ -72,3 +72,32 @@ def medicine(request):
         print(medicines)
         context = {"title":"Medicines",'medicine':medicines}
         return render(request, 'medicines.html',context)
+
+
+def feedback(request):
+    if request.user.is_authenticated and request.user.is_patient:
+        if request.method == 'POST':
+            feed = Feedback(
+                patient = Patient.objects.get(pk=request.user.pk),
+                feedback = request.POST.get('feedback'),
+                solve = False
+            )
+            feed.save()
+            return redirect('/patient/home')
+        return render(request, 'feedback.html', {"title":"Feedback"})
+    else:
+        return redirect('/patient/home')
+
+def report(request):
+    if request.user.is_authenticated and request.user.is_patient:
+        if request.method == 'POST':
+            report = ReportProblem(
+                patient=Patient.objects.get(pk=request.user.pk),
+                problem = request.POST.get('report'),
+                solve = False
+            )
+            report.save()
+            return redirect('/patient/home')
+        return render(request, 'report.html',{"title":"Report"})
+    else:
+        return redirect('/patient/home')
