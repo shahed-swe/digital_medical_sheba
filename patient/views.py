@@ -54,8 +54,14 @@ def registration(request):
 def profile(request):
     if request.user.is_authenticated and request.user.is_patient:
         pat = Patient.objects.filter(pk=request.user.pk)
-        print(pat[0].pk)
-        context = {"title":"Profile | {}".format(pat[0].full_name),'patient':pat}
+        medicines = assignMedicineNew.objects.filter(patient=pat[0].user.pk)
+        report = PatientHealthReport.objects.filter(patient=pat[0].user.pk)
+        medicines_new = []
+        for i in medicines:
+            for j in i.medicine.all():
+                if j.medicine_name not in medicines_new:
+                    medicines_new.append(j.medicine_name)
+        context = {"title":"Profile | {}".format(pat[0].full_name),'patient':pat[0],'medicine_name':medicines_new,'report':report}
         return render(request, 'patient_profile.html',context)
     else:
         return redirect('/patient/home')

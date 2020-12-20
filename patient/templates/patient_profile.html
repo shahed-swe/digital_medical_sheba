@@ -4,49 +4,74 @@
 <!--  -->
 {%block main_content%}
 <!-- start -->
+<style>
+    .progress-tittle {
+        color: #00ce7c !important;
+    }
+    
+    li {
+        list-style-type: none;
+        padding-top: 10px;
+    }
+    
+    @media (max-width: 600px) {
+        .p-ab {
+            display: block !important;
+        }
+    }
+</style>
 <section class="w3l-about1 py-5" id="intro">
     <div class="new-block top-bottom py-md-4">
         <div class="container">
             <div class="title-content text-center">
                 <h6 class="sub-title">Profile Information</h6>
-                <h3 class="hny-title"><span>{{user.first_name | title}}</span> {{user.last_name | title}} </h3>
+                <h3 class="hny-title"><span>{{user.first_name | title}}</span> {{user.last_name | title}} (Patient)</h3>
             </div>
             <div class="row mt-lg-5 mt- align-items-center">
                 <div class="col-lg-4 middle-section text-left">
                     <div class="section-width mb-lg-4">
-                        <h3 class="hny-title">The Best cleaning Service in Our City.</h3>
+                        {%if report%}
+                        <h3 class="hny-title">Status.</h3>
+                        {%for i in report%}
+                        <!--  -->
+                        <ul>
+                            <li>{{forloop.counter}}. <span>{{i.health_report}}</span></li>
+                        </ul>
+                        <!--  -->
+                        {%endfor%}
+                        <!--  -->
+                        {%endif%}
                     </div>
                 </div>
                 <div class="col-lg-4 left-section my-lg-0 my-4 pr-lg-4">
                     <div class="progress-abodehny-inf">
                         <div class="progress-info">
-                            <h6 class="progress-tittle">Сleaning</h6>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-striped" role="progressbar" style="width:70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
-                                </div>
-                            </div>
+                            <h6 class="progress-tittle">Email</h6>
+                            <span>{{user.email}}</span>
                         </div>
                         <div class="progress-info">
-                            <h6 class="progress-tittle">Organization
+                            <h6 class="progress-tittle">Address
                             </h6>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-striped" role="progressbar" style="width:85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
-                                </div>
-                            </div>
+                            <span>{{patient.address}}</span>
                         </div>
                         <div class="progress-info">
-                            <h6 class="progress-tittle">Repairs</h6>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">
-                                </div>
-                            </div>
+                            <h6 class="progress-tittle">Age</h6>
+                            <span>{{patient.age}}</span>
+                        </div>
+                        <div class="progress-info">
+                            <h6 class="progress-tittle">Phone No</h6>
+                            <span>{{patient.phone_no}}</span>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 right-section">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    </p>
-                    <p class="p-ab">possimus, non nam fugit autem ullam, soluta atque tenetur amet aliquam sequi sunt architecto iure.</p>
+                    <h3 class="hny-title">Assigned Medicine List</h3>
+                    <br>
+                    <!--  -->
+                    {%for i in medicine_name%}
+                    <p class="p-ab">{{forloop.counter}}. {{i}}</p>
+                    {%endfor%}
+                    <!--  -->
                 </div>
             </div>
         </div>
