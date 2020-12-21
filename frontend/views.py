@@ -361,7 +361,7 @@ def delete_assistant(request, id):
 # crud operations are successfully done
 # for admin panel control set bill, this bill will go to patient
 def set_bill(request):
-    if request.user.is_authenticated and request.user.is_superuser:
+    if request.user.is_authenticated and request.user.is_assistant:
         patient = Patient.objects.all()
         bill = Bill.objects.all()
         if request.method == "POST":
@@ -381,7 +381,7 @@ def set_bill(request):
 
 # edit bill view only accessible for admin
 def edit_bill(request, id):
-    if request.user.is_authenticated and request.user.is_superuser:
+    if request.user.is_authenticated and request.user.is_assistant:
         bill = Bill.objects.filter(pk=id)
         if request.method == "POST":
             if request.POST.get('paid') == 'on':
@@ -407,7 +407,7 @@ def edit_bill(request, id):
 
 # delete view of bill, only accessible for admin
 def delete_bill(request, id):
-    if request.user.is_authenticated and request.user.is_superuser:
+    if request.user.is_authenticated and request.user.is_assistant:
         bill = Bill.objects.filter(pk=id)
         if request.method == "POST":
             val = request.POST.get('button-value')
