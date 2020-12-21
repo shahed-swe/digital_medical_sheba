@@ -71,9 +71,22 @@
                             <h6 class="progress-tittle">Phone No</h6>
                             <span>{{patient.phone_no}}</span>
                         </div>
+                        <div class="progress-info">
+                            <h6 class="progress-tittle">Status</h6>
+                            <!--  -->
+                            {%if patient.released%}
+                            <!--  -->
+                            <span>Released</span>
+                            <!--  -->
+                            {%else%}
+                            <span>Not Released</span>
+                            <!--  -->
+                            {%endif%}
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-4 right-section">
+                    {%if medicine_name%}
                     <h3 class="hny-title">Assigned Medicine List</h3>
                     <br>
                     <!--  -->
@@ -81,6 +94,7 @@
                     <p class="p-ab">{{forloop.counter}}. {{i}}</p>
                     {%endfor%}
                     <!--  -->
+                    {%endif%}
                 </div>
             </div>
         </div>
@@ -89,9 +103,11 @@
 <section class="w3l-about1 py-5" id="intro">
     <div class="new-block top-bottom py-md-4">
         <div class="container">
+            {%if bill or nurse or doctor%}
             <div class="title-content text-center">
                 <h6 class="sub-title">Other Information</h6>
             </div>
+            {%endif%}
             <div class="row mt-lg-5 mt- align-items-center">
                 <div class="col-lg-4 middle-section text-left">
                     <div class="section-width mb-lg-4">
@@ -135,10 +151,11 @@
                     </div>
                 </div>
                 <div class="col-lg-4 right-section">
+                    {%if doctor%}
                     <h3 class="hny-title">Assigned Doctor</h3>
                     <br>
                     <!--  -->
-                    {%if doctor%}
+
                     <!--  -->
                     {%for i in doctor%}
                     <!--  -->
@@ -146,9 +163,11 @@
                     <!--  -->
                     {%endfor%}
                     <!--  -->
-                    {%endif%}
+
                 </div>
+                {%endif%}
             </div>
+
         </div>
     </div>
 </section>
