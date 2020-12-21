@@ -14,7 +14,7 @@
                     {%if user.is_superuser %}
                     <h1>Welcome Admin Mr. <strong>{{user.first_name | title}} {{user.last_name | title}}</strong><br><small>You Look Awesome!</small></h1>
                     {%elif user.is_doctor%}
-                    <h1>Welcome Doc Mr. <strong>{{user.first_name | title}} {{user.last_name | title}}</strong><br><small>You Look Awesome!</small></h1>
+                    <h1>Welcome Dr. Mr. <strong>{{user.first_name | title}} {{user.last_name | title}}</strong><br><small>You Look Awesome!</small></h1>
                     {%elif user.is_assistant%}
                     <h1>Welcome Mr. <strong>{{user.first_name | title}} {{user.last_name | title}}</strong><br><small>You Look Awesome!</small></h1>
                     {%elif user.is_nurse%}
