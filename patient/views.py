@@ -4,8 +4,6 @@ from main.models import *
 from django.http import HttpResponse
 # Create your views here.
 def patient(request):
-    print(get_ip(request))
-    print(request.user.full_name)
     if not request.user.is_authenticated:
         return redirect('/login')
     elif request.user.is_authenticated and request.user.is_superuser:
