@@ -16,7 +16,7 @@ def patient(request):
         return redirect('/')
     else:
         print(get_ip(request))
-        print(request.user.full_name)
+        print(request.user.first_name +' '+ request.user.last_name)
         return render(request, 'home.html', {"title":"Patient | Home"})
 
 
