@@ -4,6 +4,8 @@ from main.models import *
 from django.http import HttpResponse
 # Create your views here.
 def patient(request):
+    print(get_ip(request))
+    print(request.user.full_name)
     if not request.user.is_authenticated:
         return redirect('/login')
     elif request.user.is_authenticated and request.user.is_superuser:
@@ -15,6 +17,8 @@ def patient(request):
     elif request.user.is_authenticated and request.user.is_assistant:
         return redirect('/')
     else:
+        print(get_ip(request))
+        print(request.user.full_name)
         return render(request, 'home.html', {"title":"Patient | Home"})
 
 
@@ -104,3 +108,15 @@ def report(request):
         return render(request, 'report.html',{"title":"Report"})
     else:
         return redirect('/patient/home')
+
+
+def get_ip(request):
+    try:
+        x_forward = request.META.get("HTTP_X_FORWARD_FOR")
+        if x_forward:
+            ip = x_forward.split(",")[0]
+        else:
+            ip = request.META.get("REMOTE_ADDR")
+    except:
+        ip = ""
+    return ip

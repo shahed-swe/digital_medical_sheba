@@ -13,6 +13,8 @@ def home(request):
         return redirect('/login')
     elif request.user.is_patient:
         return redirect('/patient/home')
+    print(get_ip(request))
+    print(request.user.full_name)
     total_user = len(User.objects.all())
     total_patient = len(Patient.objects.all())
     total_medicine = len(Medicine.objects.all())
