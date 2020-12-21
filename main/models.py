@@ -91,7 +91,8 @@ class Medicine(models.Model):
         return self.medicine_name + ' | '+ str(self.pk)
 
 class Feedback(models.Model):
-    patient = models.OneToOneField(Patient, on_delete=models.CASCADE, primary_key=True)
+    id = models.AutoField(primary_key=True)
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     feedback = models.CharField(max_length=120, blank=True, null=True)
     solve = models.BooleanField(default=False)
 
@@ -114,7 +115,8 @@ class Bill(models.Model):
         return self.patient.full_name+ ' | '+str(self.pk)
 
 class ReportProblem(models.Model):
-    patient = models.OneToOneField(Patient, on_delete=models.CASCADE, primary_key=True)
+    id = models.AutoField(primary_key=True)
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     problem = models.CharField(max_length=300, blank=True, null=True)
     solve = models.BooleanField(default=False)
 
