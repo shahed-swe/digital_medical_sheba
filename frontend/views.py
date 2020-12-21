@@ -63,8 +63,21 @@ def user_profile(request):
         return render(request, 'front/user_profile.html',{"title":"User Profile"})
     else:
         return redirect('/login')
+
+def get_ip(request):
+    try:
+        x_forward = request.META.get("HTTP_X_FORWARD_FOR")
+        if x_forward:
+            ip = x_forward.split(",")[0]
+        else:
+            ip = request.META.get("REMOTE_ADDR")
+    except:
+        ip = ""
+    return ip
+
 # for all type of users
 def mylogin(request):
+    print(get_ip(request))
     if request.user.is_authenticated:
         return redirect('/')
     if request.method == "POST":
