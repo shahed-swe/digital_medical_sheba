@@ -1,0 +1,64 @@
+Assalamualaikum everyone. First of all i would like to give thanks to our respective teacher who give us a big opportunity to make this project and talk about it today. Also to you guys who are listening and watching me right now.
+
+So, Let's start.
+
+
+
+These is our team mates who have have worked a lot during doing this project and thanks can not be a word to blesed them. Thank to all who have contributed directly and indirectly in our project.
+...
+
+
+So, let's get started. we have completed the full process of Digital sheba project web application which main focus was to help those people who have admitted into a hospital and not getting proper service from the authority.
+
+But we have made that system not only to help the patient but also to help other stuffs who are working with the authorities of a hospital like doctor, nurse assistant etc.
+
+We have developed here the dashboard for every actor who are working with the authorities and each dashboard have different types of interactions. We have tried as much as we can do. Though we have missed some features also
+
+we will try to them for our future developement..
+
+
+
+
+We have created models to make tables and columns in our database completely, we have completed creating view to render our context processor. we have successfully enaged Django MVT architechture using template engine and 
+finally bulding a container to deploy it with docker.
+
+
+
+During doing this project we have fall into many problem like applying django authentication. At first time we were unable to find out which modules we need to use for authentication. Also we have faced so many problems during
+
+making dashboard cause we have 5 different types of actors and we have to make 5 types of user role for them. We solved them using abstracting the base user. We have also faced so many problems during version controlling using git
+
+cause we have 4 team members and every members have different types of commits. Also we have faced many problems when we started deploying our project in vps server. and to solve this problem we have used docker container which is 
+
+another concept of dockerize the whole project.
+
+
+
+
+At first we have tried to build API using django rest framework which had provide us serialized data. And to test it we have used postman with some credentials. We have tried to use those API in react js first but after
+
+that to enhence our productivity we started building our project using django template engine to complete our project fully. We will show you both our API's and our main project one by one though.
+
+To make user role we have used django permission mixin and to build a build version of our project inside a container we have used docker and deployed it in our VPS. Here we have learned four things as you can see
+
+we have learned how to use and test our API's using postman, how to serialize our data into a JSON format, how to make user role permission and how to use docker to make a build version of a project.
+
+
+
+
+Here is the part where we can say this things can be delivered right now. we have successfully build login and registration page. Here only patient can access registration page cause other users will be created via admin
+
+we have 4 types of dashbaord for 4 differenet types of user like (Admin, Doctor, Nurse and Assistant). We have made home page for patient only who can give report and feedback to system to re-allocate his problems.
+
+
+
+
+And finally now i want to show our full project which has already been running on our vps
+
+
+
+
+
+Thank you everyone for giving me this opportunity to show our project fully. Let's get into it. As you can see we have already deployed it into our digital ocean VPS server using docker.
+
+Here you can see it. And this is our login page. we will use our test user credentials to see which have been implemented inside it. Last start from the admin one and after that we will show others.
