@@ -37,8 +37,13 @@ Don't forget to update your requirements.txt file with these new pips.
 requirements.txt should have the following two lines:
 
 ```
-django
-django-rest-framework
+asgiref==3.2.10
+Django==3.1.2
+django-cors-headers==3.5.0
+django-rest-framework==0.1.0
+djangorestframework==3.12.1
+requests
+gunicorn==20.0.4
 ```
 ## Let's See how to run
 ```
